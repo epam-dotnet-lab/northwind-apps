@@ -21,7 +21,7 @@
 	* [Простым языком об HTTP](https://habr.com/ru/post/215117/).
 	* [Обзор протокола HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP/Overview) и [HTTP-сообщения](https://developer.mozilla.org/ru/docs/Web/HTTP/Messages) в разделе [MDN web docs: HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP).
 2. Используйте в качестве справочного материала:
-	* [HTTP-заголовки (HTTP Headers)](https://developer.mozilla.org/ru/docs/HTTP/Headers).
+	* [HTTP-заголовки](https://developer.mozilla.org/ru/docs/Web/HTTP/Headers).
 	* [Методы HTTP запроса](https://developer.mozilla.org/ru/docs/Web/HTTP/Methods).
 	* [Коды ответа HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP/Status).
 	* [Wiki: HTTP](https://ru.wikipedia.org/wiki/HTTP).
@@ -37,6 +37,7 @@
 2. Освойте базовые сценарии работы с Postman:
 	* Статья [Введение в Postman](https://habr.com/ru/company/kolesa/blog/351250/).
 	* Руководство [Postman Tutorial for Beginners with API Testing Example](https://www.guru99.com/postman-tutorial.html).
+
 Дополнительные материалы:
 	* Серия видео [New to Postman](https://www.youtube.com/playlist?list=PLM-7VG-sgbtBsenu0CM-UF3NZj3hQFs7E).
 	* Серия видео [Postman "How To"](https://www.youtube.com/playlist?list=PLM-7VG-sgbtCJYpjQfmLCcJZ6Yd74oytQ).
