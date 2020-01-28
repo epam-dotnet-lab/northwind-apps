@@ -30,7 +30,7 @@ const string serviceUri = "https://services.odata.org/TripPinRESTierService";
 var container = new Microsoft.OData.Service.Sample.TrippinInMemory.Models.Container(new Uri(serviceUri));
 
 Console.WriteLine("People in TripPin service:");
-var people = container.People.ToArray();
+var people = container.People;
 
 foreach (var person in people)
 {
@@ -53,7 +53,7 @@ var container = new Microsoft.OData.Service.Sample.TrippinInMemory.Models.Contai
 IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
 {
     Console.WriteLine("People in TripPin service:");
-    var people = container.People.EndExecute(ar).ToArray();
+    var people = container.People.EndExecute(ar);
 
     foreach (var person in people)
     {

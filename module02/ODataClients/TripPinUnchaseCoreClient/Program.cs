@@ -16,7 +16,7 @@ namespace TripPinUnchaseCoreClient
             IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
             {
                 Console.WriteLine("People in TripPin service:");
-                var people = container.People.EndExecute(ar).ToArray();
+                var people = container.People.EndExecute(ar);
 
                 foreach (var person in people)
                 {

@@ -12,7 +12,7 @@ namespace TripPinUnchaseFrameworkClient
             const string serviceUri = "https://services.odata.org/TripPinRESTierService";
             var container = new Microsoft.OData.Service.Sample.TrippinInMemory.Models.Container(new Uri(serviceUri));
 
-            var people = container.People.ToArray();
+            var people = container.People;
 
             Console.WriteLine("People in TripPin service:");
 
