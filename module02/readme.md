@@ -36,6 +36,9 @@ foreach (var person in people)
 {
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
+
+Console.WriteLine("Press any key to continue.");
+Console.ReadLine();
 ```
 
 
@@ -68,6 +71,9 @@ IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
 }, null);
 
 WaitHandle.WaitAny(new[] { asyncResult.AsyncWaitHandle });
+
+Console.WriteLine("Press any key to continue.");
+Console.ReadLine();
 ```
 
 3. Создайте новое консольное приложение **.NET Core** - _TripPinUnchaseCoreAsyncClient_ и сгенерируйте код клиента.
@@ -89,6 +95,9 @@ foreach (var person in people)
 {
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
+
+Console.WriteLine("Press any key to continue.");
+Console.ReadLine();
 ```
 
 Такой подход называется [Task-based Asynchronous Pattern](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap).
@@ -176,6 +185,9 @@ foreach (var person in employees)
 {
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
+
+Console.WriteLine("Press any key to continue.");
+Console.ReadLine();
 ```
 
 
@@ -203,6 +215,9 @@ foreach (var person in employees)
 {
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
+
+Console.WriteLine("Press any key to continue.");
+Console.ReadLine();
 ```
 
 
@@ -276,4 +291,44 @@ foreach (var person in employees)
 В чем разница между двумя подходами для брейкпоинтов #1.3 и #2.3?
 
 
-#### Задание 6. Утилизация потоков в асинхронной модели
+#### Задание 6. Ошибка синхронизации
+
+У приложений _TripPinUnchaseCoreAsyncClient_ и _NorthwindServiceCoreClient_ есть недостаток - строка "Press any key..." выводится раньше списка людей.
+
+```
+Press any key to continue.
+People in TripPin service:
+        Russell Whyte
+        Scott Ketchum
+        Ronald Mundy
+...
+```
+
+Это происходит из-за того, что вызов _EndExecute_ в паралелльном потоке разблокирует основной поток, который заблокирован вызовом метода _WaitAny_, раньше чем произойдет печать списка.
+
+#### Выполнение
+
+1. Изучите пример из статьи [ManualResetEventSlim](https://docs.microsoft.com/en-us/dotnet/api/system.threading.manualreseteventslim).
+2. Модифицируйте код _Program.Main_ приложения _TripPinUnchaseCoreAsyncClient_:
+
+```cs
+ManualResetEventSlim mre = new ManualResetEventSlim(); // (1) - Инициализация примитива синхронизации "событие".
+
+IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
+{
+    Console.WriteLine("People in TripPin service:");
+    var people = container.People.EndExecute(ar);
+
+    foreach (var person in people)
+    {
+        Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
+    }
+
+    mre.Set(); // (2) - Отправить сигнал методу WaitAll.
+
+}, null);
+
+WaitHandle.WaitAny(new[] { mre.WaitHandle }); // (3) - Блокировать поток выполнения, пока не будет получен сигнал.
+```
+
+3. Аналогичным образом модифицируйте код приложения _NorthwindServiceCoreClient_.
