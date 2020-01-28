@@ -18,7 +18,7 @@ _Протокол OData имеет несколько версий (на тек�
 
 #### Выполнение
 
-Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако оно поддерживает только версию 4 и доступно только для Visual Studio 2015 и 2017.
+1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако оно поддерживает только версию 4 и доступно только для Visual Studio 2015 и 2017.
 2. Создайте новое консольное приложение *.NET Framework* - _TripPinUnchaseFrameworkClient_.
 3. Сгенерируйте код клиента, используя руководство [How to generate C# or Visual Basic client code for OData protocol versions 1.0–4.0](https://medium.com/@unchase/how-to-generate-c-or-visual-basic-client-code-for-odata-protocol-versions-1-0-4-0-a3a4f9402ea1).
 
