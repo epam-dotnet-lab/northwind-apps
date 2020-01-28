@@ -293,7 +293,7 @@ foreach (var person in employees)
 
 #### Задание 6. Ошибка синхронизации
 
-У приложений _TripPinUnchaseCoreAsyncClient_ и _NorthwindServiceCoreClient_ есть недостаток - строка "Press any key..." выводится раньше списка людей.
+У приложений _TripPinUnchaseCoreClient_ и _NorthwindServiceCoreClient_ есть недостаток - строка "Press any key..." выводится раньше списка людей.
 
 ```
 Press any key to continue.
@@ -309,7 +309,7 @@ People in TripPin service:
 #### Выполнение
 
 1. Изучите пример из статьи [ManualResetEventSlim](https://docs.microsoft.com/en-us/dotnet/api/system.threading.manualreseteventslim).
-2. Модифицируйте код _Program.Main_ приложения _TripPinUnchaseCoreAsyncClient_:
+2. Модифицируйте код _Program.Main_ приложения _TripPinUnchaseCoreClient_:
 
 ```cs
 ManualResetEventSlim mre = new ManualResetEventSlim(); // (1) - Инициализация примитива синхронизации "событие".
@@ -332,3 +332,9 @@ WaitHandle.WaitAny(new[] { mre.WaitHandle }); // (3) - Блокировать п
 ```
 
 3. Аналогичным образом модифицируйте код приложения _NorthwindServiceCoreClient_.
+
+
+#### Примеры
+
+* [Примеры выполненных заданий](ODataClients).
+* [Пример файла northwind-data-service.edmx](northwind-data-service.edmx).
