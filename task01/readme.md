@@ -25,11 +25,12 @@
 	* [Методы HTTP запроса](https://developer.mozilla.org/ru/docs/Web/HTTP/Methods).
 	* [Коды ответа HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP/Status).
 	* [Wiki: HTTP](https://ru.wikipedia.org/wiki/HTTP).
+3. Проверьте свои знания [с помощью теста](http://www.quizful.net/test/http-basics).
 
 
 ### Задание 2. Сервис TripPin
 
-Научитесь использовать демонстрационный OData-сервис TripPin при помощи Postman.
+Научитесь использовать демонстрационный OData-сервис TripPin с помощью Postman.
 
 #### Выполнение
 
@@ -77,6 +78,8 @@
 
 ### Задание 4. Сервис Northwind.
 
+Научитесь использовать демонстрационный OData-сервис Northwind с помощью Postman.
+
 #### Выполнение
 
 1. Создайте в Postman новую коллекцию с именем Northwind, в этой коллекции создайте такие запросы к [Northwind OData Service](https://services.odata.org/V2/Northwind/Northwind.svc/), которые будут удовлетворять описанию из таблицы ниже. После проверки запроса, занесите необходимые параметры в таблицу:
@@ -84,12 +87,18 @@
 | Query Description                                                 | HTTP Verb | Url                        |
 | ----------------------------------------------------------------- | --------- | -------------------------- |
 | Get service metadata.                                             | GET       | /$metadata                 |
-| Get all customers.                                                | GET       |                            |
-| Get a customer with "ALFKI" id.                                   | GET       |                            |
-| Get all orders.                                                   | GET       |                            |
-| Get an order with "10248" id.                                     | GET       |                            |
-| Get all orders for a customer with "ANATR" id.                    | GET       |                            |
-| Get a customer for an order with "10248" id.                      | GET       |                            |
+| Get all customers.                                                |           |                            |
+| Get a customer with "ALFKI" id.                                   |           |                            |
+| Get all orders.                                                   |           |                            |
+| Get an order with "10248" id.                                     |           |                            |
+| Get all orders for a customer with "ANATR" id.                    |           |                            |
+| Get a customer for an order with "10248" id.                      |           |                            |
+| Get a customer for an order with "10248" id.                      |           |                            |
+| Get all customers from Germany.                                   |           |                            |
+| Get all orders shipped to France in 1997.                         |           |                            |
+| Get all products with units in stock less than 20.                |           |                            |
+| Get all orders shipped by company "Speedy Express".               |           |                            |
+| Get all orders shipped to UK with employees.                      |           |                            |
 
 Создайте самостоятельно еще минимум 5 сложных запросов и запишите их в таблицу.
 
