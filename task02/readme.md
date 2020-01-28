@@ -31,9 +31,12 @@ _Протокол OData имеет несколько версий (на тек�
 ```cs
 const string serviceUri = "https://services.odata.org/TripPinRESTierService";
 var container = new Microsoft.OData.Service.Sample.TrippinInMemory.Models.Container(new Uri(serviceUri));
-var people = container.People.ToArray();
+
 Console.WriteLine("People in TripPin service:");
-foreach (var person in people) {
+var people = container.People.ToArray();
+
+foreach (var person in people)
+{
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
 ```
@@ -41,3 +44,45 @@ foreach (var person in people) {
 5. Создайте новое консольное приложение *.NET Core*, сгенерируйте код клиента, добавьте код в _Program.Main_ и запустите приложение. При выполнении должно появиться исключение:
 
 > System.NotSupportedException: 'This target framework does not enable you to directly enumerate over a data service query. This is because enumeration automatically sends a synchronous request to the data service. Because this framework only supports asynchronous operations, you must instead call the BeginExecute and EndExecute methods to obtain a query result that supports enumeration.'
+
+См. причину ошибки в тикете [System.NotSupportedException when calling OData service from NetCoreApp2.1](https://github.com/OData/odata.net/issues/1303) - библиотека Microsoft.OData.Client поддерживает только асинхронные вызовы.
+
+6. Примените [APM-подход](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/asynchronous-programming-model-apm), чтобы сделать вызов к сервису асинхронным:
+
+```cs
+const string serviceUri = "https://services.odata.org/TripPinRESTierService";
+var container = new Microsoft.OData.Service.Sample.TrippinInMemory.Models.Container(new Uri(serviceUri));
+
+IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
+{
+    Console.WriteLine("People in TripPin service:");
+    var people = container.People.EndExecute(ar).ToArray();
+
+    foreach (var person in people)
+    {
+        Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
+    }
+
+}, null);
+
+WaitHandle.WaitAny(new[] { asyncResult.AsyncWaitHandle });
+```
+
+7. Создайте новое консольное приложение *.NET Core* - _TripPinUnchaseCoreAsyncClient_ и сгенерируйте код клиента.
+8. Исправьте сигнатуру метода _Program.Main_. (При необходимости [измените версию языка в Visual Studio](https://codez.deedx.cz/posts/csharp-async-main/) или [параметр LangVersion в csproj](https://stackoverflow.com/questions/47588531/error-message-cs5001-program-does-not-contain-a-static-main-method-suitable-f)).
+
+```cs
+static async Task Main(string[] args)
+```
+
+9. Добавьте код вызова сервиса из пункта (4) с применением _await_ и запустите приложение.
+
+```cs
+Console.WriteLine("People in TripPin service:");
+var people = await container.People.ExecuteAsync();
+
+foreach (var person in people)
+{
+    Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
+}
+```
