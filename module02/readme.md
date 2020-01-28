@@ -42,7 +42,7 @@ foreach (var person in people)
 
 > System.NotSupportedException: 'This target framework does not enable you to directly enumerate over a data service query. This is because enumeration automatically sends a synchronous request to the data service. Because this framework only supports asynchronous operations, you must instead call the BeginExecute and EndExecute methods to obtain a query result that supports enumeration.'
 
-См. причину ошибки в тикете [System.NotSupportedException when calling OData service from NetCoreApp2.1](https://github.com/OData/odata.net/issues/1303) - библиотека Microsoft.OData.Client поддерживает только [асинхронные вызовы](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/). (Вы можете автоматически переводить текст статей документации при помощи [ru-ru в URL](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/async/)).
+См. причину ошибки в тикете [System.NotSupportedException when calling OData service from NetCoreApp2.1](https://github.com/OData/odata.net/issues/1303) - библиотека Microsoft.OData.Client поддерживает только [асинхронные вызовы](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/). (Используйте [ru-ru в URL](https://docs.microsoft.com/ru-ru/dotnet/csharp/programming-guide/concepts/async/), чтобы втоматически переводить текст статей документации на русский язык).
 
 6. Примените [APM-подход](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/asynchronous-programming-model-apm), чтобы сделать вызов к сервису асинхронным:
 
