@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPinUnchaseCoreClient", "TripPinUnchaseCoreClient\TripPinUnchaseCoreClient.csproj", "{52E54EF6-C127-4ED8-977D-DE05E66420DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TripPinUnchaseFrameworkClient", "TripPinUnchaseFrameworkClient\TripPinUnchaseFrameworkClient.csproj", "{1A697FB7-A6C8-428A-BEAE-DE4A310B0F1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TripPinUnchaseCoreAsyncClient", "TripPinUnchaseCoreAsyncClient\TripPinUnchaseCoreAsyncClient.csproj", "{79C700B5-DE52-4BC1-B7CA-80111086059F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindServiceFrameworkClient", "NorthwindServiceFrameworkClient\NorthwindServiceFrameworkClient.csproj", "{DD1C2763-6713-4911-A6A0-7FE2441B258A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindServiceCoreAsyncClient", "NorthwindServiceCoreAsyncClient\NorthwindServiceCoreAsyncClient.csproj", "{EF6F116E-AD5D-4A07-B9BF-2F742C0D75E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindServiceCoreClient", "NorthwindServiceCoreClient\NorthwindServiceCoreClient.csproj", "{44741BC5-D64D-46DA-A33B-F0A197072939}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52E54EF6-C127-4ED8-977D-DE05E66420DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E54EF6-C127-4ED8-977D-DE05E66420DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E54EF6-C127-4ED8-977D-DE05E66420DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E54EF6-C127-4ED8-977D-DE05E66420DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A697FB7-A6C8-428A-BEAE-DE4A310B0F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A697FB7-A6C8-428A-BEAE-DE4A310B0F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A697FB7-A6C8-428A-BEAE-DE4A310B0F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A697FB7-A6C8-428A-BEAE-DE4A310B0F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79C700B5-DE52-4BC1-B7CA-80111086059F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C700B5-DE52-4BC1-B7CA-80111086059F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C700B5-DE52-4BC1-B7CA-80111086059F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C700B5-DE52-4BC1-B7CA-80111086059F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD1C2763-6713-4911-A6A0-7FE2441B258A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1C2763-6713-4911-A6A0-7FE2441B258A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1C2763-6713-4911-A6A0-7FE2441B258A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1C2763-6713-4911-A6A0-7FE2441B258A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6F116E-AD5D-4A07-B9BF-2F742C0D75E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6F116E-AD5D-4A07-B9BF-2F742C0D75E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6F116E-AD5D-4A07-B9BF-2F742C0D75E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6F116E-AD5D-4A07-B9BF-2F742C0D75E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44741BC5-D64D-46DA-A33B-F0A197072939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44741BC5-D64D-46DA-A33B-F0A197072939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44741BC5-D64D-46DA-A33B-F0A197072939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44741BC5-D64D-46DA-A33B-F0A197072939}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {835BA62F-773C-433B-A72C-4602E66A09DA}
+	EndGlobalSection
+EndGlobal
