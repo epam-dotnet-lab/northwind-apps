@@ -18,8 +18,8 @@
 #### Выполнение
 
 1. Изучите статьи:
-	* ["Простым языком об HTTP"](https://habr.com/ru/post/215117/).
-	* ["Обзор протокола HTTP"](https://developer.mozilla.org/ru/docs/Web/HTTP/Overview) и ["HTTP-сообщения"](https://developer.mozilla.org/ru/docs/Web/HTTP/Messages) в разделе [MDN web docs: HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP).
+	* [Простым языком об HTTP](https://habr.com/ru/post/215117/).
+	* [Обзор протокола HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP/Overview) и [HTTP-сообщения](https://developer.mozilla.org/ru/docs/Web/HTTP/Messages) в разделе [MDN web docs: HTTP](https://developer.mozilla.org/ru/docs/Web/HTTP).
 2. Используйте в качестве справочного материала:
 	* [HTTP-заголовки (HTTP Headers)](https://developer.mozilla.org/ru/docs/HTTP/Headers).
 	* [Методы HTTP запроса](https://developer.mozilla.org/ru/docs/Web/HTTP/Methods).
