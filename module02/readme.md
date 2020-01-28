@@ -98,13 +98,13 @@ foreach (var person in people)
 
 #### Выполнение
 
-1. Используя Postman, получите метаданные [сервиса Northwind (read only)](https://www.odata.org/odata-services/) и сохраните их в файл _northwind-data-service.edmx_.
+1. Используя Postman, получите метаданные [сервиса Northwind (read only) версии 3](https://www.odata.org/odata-services/) и сохраните их в файл _northwind-data-service.edmx_.
 2. Установите пакет [WCF Data Services 5.6 Tools](http://download.microsoft.com/download/1/C/A/1CAA41C7-88B9-42D6-9E11-3C655656DAB1/WcfDataServices.exe) и найдите каталог, в котором находится DataSvcUtil.exe.
 
 Для поиска файлов можно использовать [консоль PowerShell](https://devblogs.microsoft.com/scripting/use-windows-powershell-to-search-for-files/):
 
 ```powershell
-(base) PS C:\> Get-Childitem -Path "C:\" -Include DataSvcUtil.exe -Recurse -Name
+(base) PS C:\> Get-Childitem -Path C:\ -Include DataSvcUtil.exe -Recurse -Name
 Program Files (x86)\Microsoft WCF Data Services\5.6\bin\tools\DataSvcUtil.exe
 Windows\Microsoft.NET\Framework\v4.0.30319\DataSvcUtil.exe
 Windows\Microsoft.NET\Framework64\v4.0.30319\DataSvcUtil.exe
@@ -114,15 +114,33 @@ Windows\WinSxS\msil_datasvcutil_b77a5c561934e089_4.0.15788.0_none_a0e47c56b58e60
 
 Каталог пакета _WCF Data Services 5.6 Tools_ - C:\Program Files (x86)\Microsoft WCF Data Services\5.6.
 
-> Вместо указанного пакета можно установить другой пакет - [WCF Data Services 5.0 (OData v3)](http://download.microsoft.com/download/8/F/9/8F93DBBD-896B-4760-AC81-646F61363A6D/WcfDataServices.exe). У этого пакета будет другой установочный каталог. Также, если в системе установлен .NET Framework, то утилита DataSvcUtil находится в каталоге фреймворка в C:\Windows\Microsoft.NET. Однако эта версия утилиты не поддерживает версию 3 протокола OData.
+> Вместо указанного пакета можно установить другой пакет - [WCF Data Services 5.0 (OData v3)](http://download.microsoft.com/download/8/F/9/8F93DBBD-896B-4760-AC81-646F61363A6D/WcfDataServices.exe). У этого пакета будет другой установочный каталог. Также утилита DataSvcUtil входит в состав фреймворка и находится в подкаталогах каталога C:\Windows\Microsoft.NET. Однако утилиты из состава фреймворка не поддерживают версию 3 протокола OData.
 
 Получите параметры коммандной строки:
 
 ```sh
-$ "%ProgramFiles(x86)%\Microsoft WCF Data Services\5.6\bin\tools\DataSvcUtil.exe" /?
+D:\Work\northwind-apps>"%ProgramFiles(x86)%\Microsoft WCF Data Services\5.6\bin\tools\DataSvcUtil.exe" /?
+Microsoft (R) DataSvcUtil version 5.6.0.0
+Copyright (C) 2008 Microsoft Corporation. All rights reserved.
+
+                                                                                           DataSvcUtil Options
+/in:<file>               The file to read the conceptual model from
+/out:<file>              The file to write the generated object layer to
+/language:CSharp         Generate code using the C# language
+/language:VB             Generate code using the VB language
+/version:1.0             Accept CSDL documents tagged with m:DataServiceVersion=1.0 or lower
+/version:2.0             Accept CSDL documents tagged with m:DataServiceVersion=2.0 or lower
+/version:3.0             Accept CSDL documents tagged with m:DataServiceVersion=3.0 or lower
+/dataServiceCollection   Generate collections derived from DataServiceCollection
+/uri:<URL>               The URI to read the conceptual model from
+/help                    Display the usage message (short form: /?)
+/nologo                  Suppress copyright message
+...
 ```
 
 Нужные параметры - in, out, dataServiceCollection и version.
+
+> %ProgramFiles(x86)% - это [переменная окружения](https://stackoverflow.com/questions/9594066/how-to-get-program-files-x86-env-variable).
 
 3. Сгенерируйте кода клиента при помощи DataSvcUtil:
 
@@ -135,8 +153,6 @@ Writing object layer file...
 
 Generation Complete -- 0 errors, 0 warnings
 ```
-
-> %ProgramFiles(x86)% - это [переменная окружения](https://stackoverflow.com/questions/9594066/how-to-get-program-files-x86-env-variable).
 
 4. Создайте новое консольное приложение **.NET Framework** - _NorthwindServiceFrameworkClient_. Скопируйте файл _NorthwindDataService.cs_ в каталог проекта и добавьте его в проект.
 5. Добавьте в проект nuget-пакет [Microsoft.Data.Services.Client](https://www.nuget.org/packages/Microsoft.Data.Services.Client) при помощи [Package Manager Console](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell):
@@ -165,10 +181,12 @@ foreach (var person in employees)
 
 ### Задание 4. Генерация кода клиента с помощью утилиты DataSvcUtil для .NET Core
 
-1. Создайте новое консольное приложение **.NET Core** - _NorthwindServiceCoreAsyncClient_. Скопируйте файл _NorthwindDataService.cs_ в каталог проекта.
-2. Добавьте в проект nuget-пакет _Microsoft.Data.Services.Client_.
-3. Скопируйте код _Program.Main_ из _NorthwindServiceFrameworkClient_ и запустите приложение. Какое исключение было брошено?
-4. Перепишите код с использованием подхода APM (методы BeginExecute и EndExecute).
+#### Выполнение
+
+1. Создайте новое консольное приложение **.NET Core** - _NorthwindServiceCoreClient_. Скопируйте файл _NorthwindDataService.cs_ в каталог проекта и добавьте в проект nuget-пакет _Microsoft.Data.Services.Client_.
+2. Скопируйте код _Program.Main_ из _NorthwindServiceFrameworkClient_ и запустите приложение. Какое исключение было брошено?
+3. Перепишите код с использованием подхода APM (методы BeginExecute и EndExecute).
+4. Создайте новое консольное приложение **.NET Core** - _NorthwindServiceCoreAsyncClient_. Скопируйте файл _NorthwindDataService.cs_ в каталог проекта и добавьте в проект nuget-пакет _Microsoft.Data.Services.Client_.
 5. Измените сигнатуру метода _Program.Main_, чтобы сделать этот метод асинхронным.
 6. В коде клиента отсутствует поддержка подхода TAP - у entities.Employees нет асинхронного метода ExecuteAsync. [APM можно преобразовать в TAP](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/interop-with-other-asynchronous-patterns-and-types#from-apm-to-tap) при помощи метода FromAsync.
 
@@ -176,10 +194,9 @@ foreach (var person in employees)
 const string serviceUri = "https://services.odata.org/V3/Northwind/Northwind.svc/";
 var entities = new NorthwindModel.NorthwindEntities(new Uri(serviceUri));
 
-var employees = await Task<IEnumerable<NorthwindModel.Employee>>.Factory.FromAsync(entities.Employees.BeginExecute(null, null), (iar) =>
-{
-    return entities.Employees.EndExecute(iar);
-});
+var employees = await Task<IEnumerable<NorthwindModel.Employee>>.Factory.FromAsync(
+	entities.Employees.BeginExecute(null, null),
+	(iar) => entities.Employees.EndExecute(iar));
 
 Console.WriteLine("Employees in Northwind service:");
 foreach (var person in employees)
@@ -187,3 +204,76 @@ foreach (var person in employees)
     Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
 }
 ```
+
+
+#### Задание 5. Утилизация потоков в асинхронной модели
+
+Перед выполнением прочтите и выполните примеры:
+
+  * [Debug multithreaded applications in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/debug-multithreaded-applications-in-visual-studio)
+  * [Get started debugging multithreaded applications](https://docs.microsoft.com/en-us/visualstudio/debugger/get-started-debugging-multithreaded-apps)
+  * [Tools to debug threads and processes in Visual Studio](https://docs.microsoft.com/en-us/visualstudio/debugger/debug-threads-and-processes)
+  * [View threads in the Visual Studio debugger by using the Threads window](https://docs.microsoft.com/en-us/visualstudio/debugger/walkthrough-debugging-a-multithreaded-application)
+  * [Walkthrough: Debug a multithreaded app using the Threads window](https://docs.microsoft.com/en-us/visualstudio/debugger/how-to-use-the-threads-window)
+
+#### Выполнение
+
+1. Примените подход APM к коду клиента и расставьте брейкпоинты, как указано в коде:
+
+```cs
+const string serviceUri = "https://services.odata.org/V3/Northwind/Northwind.svc/";
+var entities = new NorthwindModel.NorthwindEntities(new Uri(serviceUri)); // breakpoint #1.1
+
+IAsyncResult asyncResult = entities.Employees.BeginExecute((ar) =>
+{
+    var employees = entities.Employees.EndExecute(ar); // breakpoint #1.2
+
+    Console.WriteLine("Employees in Northwind service:");
+    foreach (var person in employees)
+    {
+        Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
+    }
+}, null);
+
+WaitHandle.WaitAny(new[] { asyncResult.AsyncWaitHandle }); // breakpoint #1.3
+```
+
+Запустите приложение и, используя окно _Threads_, запишите параметры ID, Managed ID и Name для текущего потока в каждой точке останова.
+
+2. Примените подход TAP к коду клиента и расставьте брейкпоинты, как указано в коде:
+
+```cs
+const string serviceUri = "https://services.odata.org/V3/Northwind/Northwind.svc/";
+var entities = new NorthwindModel.NorthwindEntities(new Uri(serviceUri)); // breakpoint #2.1
+
+var employees = await Task<IEnumerable<NorthwindModel.Employee>>.Factory.FromAsync(
+    entities.Employees.BeginExecute(null, null),
+    (iar) =>
+    {
+        return entities.Employees.EndExecute(iar); // breakpoint #2.2
+    });
+
+Console.WriteLine("Employees in Northwind service:"); // breakpoint #2.3
+foreach (var person in employees)
+{
+    Console.WriteLine("\t{0} {1}", person.FirstName, person.LastName);
+}
+```
+
+Запустите приложение и, используя окно _Threads_, запишите параметры ID, Managed ID и Name для текущего потока в каждой точке останова.
+
+3. Заполните таблицу:
+
+| Breakpoint | Thread ID   | Thread Managed ID | Thread Name |
+| ---------- | ----------- | ----------------- | ----------- |
+| #1.1       |             |                   |             |
+| #1.2       |             |                   |             |
+| #1.3       |             |                   |             |
+| #2.1       |             |                   |             |
+| #2.2       |             |                   |             |
+| #2.3       |             |                   |             |
+
+В чем разница между двумя подходами для брейкпоинтов #1.3 и #2.3?
+
+
+#### Задание 6. Утилизация потоков в асинхронной модели
