@@ -20,8 +20,8 @@ _Протокол OData имеет несколько версий (на тек�
 
 #### Выполнение
 
-1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако оно поддерживает только версию 4 и доступно только для Visual Studio 2015 и 2017.
-2. Создайте новое консольное приложение *.NET Framework* - _TripPinUnchaseFrameworkClient_.
+1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако расширение поддерживает только версию 4 протокола и доступно только для Visual Studio 2015 и 2017.
+2. Создайте новое консольное приложение **.NET Framework** - _TripPinUnchaseFrameworkClient_.
 3. Сгенерируйте код клиента _TripPin_, используя руководство [How to generate C# or Visual Basic client code for OData protocol versions 1.0–4.0](https://medium.com/@unchase/how-to-generate-c-or-visual-basic-client-code-for-odata-protocol-versions-1-0-4-0-a3a4f9402ea1). Настройки генератора - [Metadata Endpoint](unchase-odata-generation-endpoint.png), [Advanced Settings](unchase-odata-generation-advanced-settings.png).
 4. Добавьте код в метод _Program.Main_, который получает из сервиса список людей и выводит на экран имя и фамилию каждого человека:
 
@@ -38,7 +38,7 @@ foreach (var person in people)
 }
 ```
 
-5. Создайте новое консольное приложение *.NET Core*, сгенерируйте код клиента, добавьте код в _Program.Main_ и запустите приложение. При выполнении должно появиться исключение:
+5. Создайте новое консольное приложение **.NET Core**, сгенерируйте код клиента, добавьте код в _Program.Main_ и запустите приложение. При выполнении должно появиться исключение:
 
 > System.NotSupportedException: 'This target framework does not enable you to directly enumerate over a data service query. This is because enumeration automatically sends a synchronous request to the data service. Because this framework only supports asynchronous operations, you must instead call the BeginExecute and EndExecute methods to obtain a query result that supports enumeration.'
 
@@ -65,7 +65,7 @@ IAsyncResult asyncResult = container.People.BeginExecute((ar) =>
 WaitHandle.WaitAny(new[] { asyncResult.AsyncWaitHandle });
 ```
 
-7. Создайте новое консольное приложение *.NET Core* - _TripPinUnchaseCoreAsyncClient_ и сгенерируйте код клиента.
+7. Создайте новое консольное приложение **.NET Core** - _TripPinUnchaseCoreAsyncClient_ и сгенерируйте код клиента.
 8. Исправьте сигнатуру метода _Program.Main_. (При необходимости [измените версию языка в Visual Studio](https://codez.deedx.cz/posts/csharp-async-main/) или [параметр LangVersion в csproj](https://stackoverflow.com/questions/47588531/error-message-cs5001-program-does-not-contain-a-static-main-method-suitable-f)).
 
 ```cs
