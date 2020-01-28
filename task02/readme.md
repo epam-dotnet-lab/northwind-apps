@@ -16,18 +16,13 @@ _Протокол OData имеет несколько версий (на тек�
 
 Работать с сервисом OData можно с помощью прямых вызовов методов HTTP, однако часто для связи с сервисом используются прокси-классы, которые генерируются автоматически с помощью дополнительного инструментария. Кодогенерация значительно упрощает написание клиента, снижает количество кода, которое требуется для полноценной работы с сервисом, а также снижает количество ошибок, которые может допустить разработчик.
 
+Научитесь генерировать код клиента для [сервиса _TripPin_](https://www.odata.org/odata-services/), который реализует 4 версию протокола ODataю
+
 #### Выполнение
 
 1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако оно поддерживает только версию 4 и доступно только для Visual Studio 2015 и 2017.
 2. Создайте новое консольное приложение *.NET Framework* - _TripPinUnchaseFrameworkClient_.
-3. Сгенерируйте код клиента, используя руководство [How to generate C# or Visual Basic client code for OData protocol versions 1.0–4.0](https://medium.com/@unchase/how-to-generate-c-or-visual-basic-client-code-for-odata-protocol-versions-1-0-4-0-a3a4f9402ea1).
-
-Настройки генератора:
-
-![Metadata Endpoint](unchase-odata-generation-endpoint.png)
-
-![Advanced Settings](unchase-odata-generation-advanced-settings.png)
-
+3. Сгенерируйте код клиента _TripPin_, используя руководство [How to generate C# or Visual Basic client code for OData protocol versions 1.0–4.0](https://medium.com/@unchase/how-to-generate-c-or-visual-basic-client-code-for-odata-protocol-versions-1-0-4-0-a3a4f9402ea1). Настройки генератора - [Metadata Endpoint](unchase-odata-generation-endpoint.png), [Advanced Settings](unchase-odata-generation-advanced-settings.png).
 4. Добавьте код в метод _Program.Main_, который получает из сервиса список людей и выводит на экран имя и фамилию каждого человека:
 
 ```cs
