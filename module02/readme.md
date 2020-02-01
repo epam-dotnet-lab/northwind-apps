@@ -2,7 +2,7 @@
 
 ## Модуль 2. Клиент для OData-сервиса
 
-_Протокол OData имеет несколько версий (на текущий момент - четыре). Версии 1, 2 и 3 являются обратно совместимыми, однако версия 4 не является обратно совместимой. Работа с сервисами разных версий отличается с точки зрения реализации клиента. Также реализация клиента зависит от целевой платформы - .NET Framework или .NET Core. Поэтому подход к работе с сервисами OData на стороне клиента может значительно отличаться в зависимости от версии сервиса и платформы._
+_Протокол OData имеет несколько версий (на текущий момент - четыре). Версии 1, 2 и 3 являются обратно совместимыми, однако версия 4 не является обратно совместимой. Работа с сервисами разных версий отличается с точки зрения реализации клиента. Также реализация клиента зависит от целевой платформы - .NET Framework или .NET Core. Поэтому подход к работе с сервисами OData на стороне клиента может отличаться в зависимости от версии сервиса и платформы._
 
 ### Цель
 
@@ -20,7 +20,7 @@ _Протокол OData имеет несколько версий (на тек�
 
 #### Выполнение
 
-1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), однако расширение поддерживает только версию 4 протокола и доступно только для Visual Studio 2015 и 2017.
+1. Установите расширение [Unchase OData Connected Service](https://marketplace.visualstudio.com/items?itemName=Unchase.unchaseodataconnectedservice) для Visual Studio 2017 и 2019, которое поддерживает версии протокола 3 и 4. (Существует другое расширение - [OData v4 Client Code Generator](https://marketplace.visualstudio.com/items?itemName=bingl.ODatav4ClientCodeGenerator), которое на текущий момент поддерживает только версию 4 протокола и доступно только для Visual Studio 2015 и 2017).
 2. Создайте новое консольное приложение **.NET Framework** - _TripPinUnchaseFrameworkClient_.
 3. Сгенерируйте код клиента _TripPin_, используя руководство [How to generate C# or Visual Basic client code for OData protocol versions 1.0–4.0](https://medium.com/@unchase/how-to-generate-c-or-visual-basic-client-code-for-odata-protocol-versions-1-0-4-0-a3a4f9402ea1). Настройки генератора - [Metadata Endpoint](unchase-odata-generation-endpoint.png), [Advanced Settings](unchase-odata-generation-advanced-settings.png).
 4. Добавьте код в метод _Program.Main_, который получает из сервиса список людей и выводит на экран имя и фамилию каждого человека:
@@ -83,7 +83,7 @@ Console.ReadLine();
 static async Task Main(string[] args)
 ```
 
-Возможность помечать метод _Main_ модификатором async появилась в C# в версии 7.1, поэтому при необходимости [измените версию языка в Visual Studio](https://codez.deedx.cz/posts/csharp-async-main/) или [параметр LangVersion в csproj](https://stackoverflow.com/questions/47588531/error-message-cs5001-program-does-not-contain-a-static-main-method-suitable-f).
+> Возможность помечать метод _Main_ модификатором async появилась в C# в версии 7.1, поэтому при необходимости [измените версию языка в Visual Studio](https://codez.deedx.cz/posts/csharp-async-main/) или [параметр LangVersion в csproj](https://stackoverflow.com/questions/47588531/error-message-cs5001-program-does-not-contain-a-static-main-method-suitable-f).
 
 5. Добавьте код вызова сервиса с применением _await_ и запустите приложение.
 
@@ -104,6 +104,8 @@ Console.ReadLine();
 
 
 ### Задание 3. Генерация кода клиента с помощью утилиты DataSvcUtil для .NET Framework
+
+DataSvcUtil ([WCF Data Service Client Utility](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/wcf-data-service-client-utility-datasvcutil-exe)) - это утилита для генерации классов клиента сервиса данных на основе метаданных, возвращаемых OData-сервисом.
 
 #### Выполнение
 
@@ -151,7 +153,7 @@ Copyright (C) 2008 Microsoft Corporation. All rights reserved.
 
 > %ProgramFiles(x86)% - это [переменная окружения](https://stackoverflow.com/questions/9594066/how-to-get-program-files-x86-env-variable).
 
-3. Сгенерируйте кода клиента при помощи DataSvcUtil:
+3. [Сгенерируйте код клиента](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-manually-generate-client-data-service-classes-wcf-data-services) при помощи DataSvcUtil:
 
 ```sh
 D:\Work\northwind-apps>"%ProgramFiles(x86)%\Microsoft WCF Data Services\5.6\bin\tools\DataSvcUtil.exe" /in:northwind-data-service.edmx /out:NorthwindDataService.cs /version:3.0 /dataservicecollection
@@ -162,6 +164,8 @@ Writing object layer file...
 
 Generation Complete -- 0 errors, 0 warnings
 ```
+
+После этого на диске должен появиться файл _NorthwindDataService.cs_.
 
 4. Создайте новое консольное приложение **.NET Framework** - _NorthwindServiceFrameworkClient_. Скопируйте файл _NorthwindDataService.cs_ в каталог проекта и добавьте его в проект.
 5. Добавьте в проект nuget-пакет [Microsoft.Data.Services.Client](https://www.nuget.org/packages/Microsoft.Data.Services.Client) при помощи [Package Manager Console](https://docs.microsoft.com/en-us/nuget/consume-packages/install-use-packages-powershell):
