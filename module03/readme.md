@@ -60,7 +60,7 @@ $ type nul > Northwind.ReportingServices.OData\.editorconfig
 $ type nul > ReportingApp\.editorconfig
 ```
 
-Заполните содержимое - [code-analysis.ruleset](ReportingApps\code-analysis.ruleset), [stylecop.json](ReportingApps\stylecop.json), [.editorconfig решения](ReportingApps\.editorconfig) и [проектные .editorconfig](ReportingApps\.editorconfig).
+Заполните содержимое - [code-analysis.ruleset](ReportingApps/code-analysis.ruleset), [stylecop.json](ReportingApps\stylecop.json), [.editorconfig решения](ReportingApps/.editorconfig) и [.editorconfig проектов](ReportingApps/ReportingApp/.editorconfig).
 
 4. Добавьте в файлы проектов ссылки на файлы настроек и подключите статические анализаторы кода:
 
@@ -85,9 +85,9 @@ $ type nul > Northwind.ReportingServices\ProductReports\Product.cs
 $ type nul > Northwind.ReportingServices\ProductReports\ProductReport.cs
 $ type nul > Northwind.ReportingServices\ProductReports\ProductReportService.cs
 ```
-Заполните содержимое - [Product.cs](ReportingApps\Northwind.ReportingServices\ProductReports\Product.cs), [ProductReport.cs](ReportingApps\Northwind.ReportingServices\ProductReports\ProductReport.cs), [ProductReportService.cs](ReportingApps\Northwind.ReportingServices\ProductReports\ProductReportService.cs).
+Заполните содержимое - [Product.cs](ReportingApps/Northwind.ReportingServices/ProductReports/Product.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices/ProductReports/ProductReportService.cs).
 
-Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps).
+Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps/).
 
 7. 
 
