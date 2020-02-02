@@ -1,15 +1,6 @@
 # Northwind Applications
 
-## Модуль 3. Запросы данных
-
-
-### Цель
-
-* Научиться использовать LINQ для запросов данных.
-* Научиться использовать Fiddler для инспекции HTTP/HTTPS-трафика.
-
-
-#### Сервисы WCF
+## Модуль 3. Querying the Data Services
 
 [WCF](https://docs.microsoft.com/en-us/dotnet/framework/wcf/) - это фреймворк, который в прошлом широко использовался для [построения распределенных приложений](http://sergeyteplyakov.blogspot.com/2011/02/wcf.html) на базе платформы .NET. Существует много рабочих приложений, которые построены на его основе и успешно работают. На текущий момент [популярность фреймворка сильно упала](https://github.com/dotnet/wcf/issues/1784), однако поддержка работающих сервисов и работа с ними по-прежнему является актуальной задачей для крупных промышленных программных систем.
 
@@ -20,6 +11,11 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 ```
 
 Наличие [".svc" в пути сервиса](https://stackoverflow.com/questions/17363429/does-a-wcf-service-always-use-an-svc-file) намекает на реализацию сервиса с помощью WCF.
+
+### Цель
+
+* Научиться использовать LINQ для построения запросов данных.
+* Научиться использовать Fiddler для инспекции HTTP/HTTPS-трафика.
 
 
 ### Задание 1. Создание каркаса приложения отчетов
@@ -101,7 +97,7 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 	* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU).
 
 
-### Задание 3. Запрос данных с OData-сервиса.
+### Задание 3. Запрос данных из OData-сервиса.
 
 #### Выполнение
 
@@ -161,7 +157,7 @@ var query = (DataServiceQuery<NorthwindProduct>)(
 
 Найдите в Fiddler ответ сервиса в XML-формате.
 
-4. Изучите статью [Query Projections](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/query-projections-wcf-data-services)
+4. Изучите статью [Query Projections](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/query-projections-wcf-data-services).
 
 Используйте проекцию для получения имени и цены единицы товара:
 
@@ -169,14 +165,14 @@ var query = (DataServiceQuery<NorthwindProduct>)(
 public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 {
     var query = (DataServiceQuery<ProductPrice>)(
-                    from p in this.entities.Products
-                    where !p.Discontinued
-                    orderby p.ProductName
-                    select new ProductPrice
-                    {
-                        Name = p.ProductName,
-                        Price = p.UnitPrice ?? 0,
-                    });
+        from p in this.entities.Products
+        where !p.Discontinued
+        orderby p.ProductName
+        select new ProductPrice
+        {
+            Name = p.ProductName,
+            Price = p.UnitPrice ?? 0,
+        });
 
     var result = await Task<IEnumerable<ProductPrice>>.Factory.FromAsync(query.BeginExecute(null, null), (ar) =>
     {
@@ -187,9 +183,25 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 }
 ```
 
-Запустите приложение, найдите в Fiddler ответ сервиса и сравните с предыдущим запросом.
+Найдите в Fiddler ответ сервиса и сравните с предыдущим запросом.
+
+5. Реализуйте метод _ProductReportService.GetMostExpensiveProductsReport_, используя проекцию:
+
+```cs
+var query = (DataServiceQuery<ProductPrice>)this.entities.Products.
+    Where(p => p.UnitPrice != null).
+    OrderByDescending(p => p.UnitPrice.Value).
+    Take(count);
+```
+
+6. Метод _ProductReportService.GetCurrentProducts_ возвращает неполный список товаров. Количество элементов в списке ограничено количеством элементов, которое сервис возвращает за один запрос. См. статьи [Loading Deferred Content](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/loading-deferred-content-wcf-data-services) и [How to: Load Paged Results](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-load-paged-results-wcf-data-services). Используйте метод [GetContinuation](https://docs.microsoft.com/en-us/dotnet/api/system.data.services.client.queryoperationresponse-1.getcontinuation), чтобы получить полный список товаров из сервиса.
+
+Найдите в Fiddler соответствующие запросы.
 
 
+### Задание 4. Дополнительные отчеты
+
+#### Выполнение
 
 Query, product (id, name, unit price) where current (not discontinued) and product cost less than $20.
 
@@ -197,13 +209,9 @@ Query, product (id, name, unit price) where current (not discontinued) and produ
 
 Query, product (id, name, unit price) of above average price.
 
-query, product (id, name, unit price) N most expensive products.
 
 Write a query to get Product list (name, units on order , units in stock) of stock is less than the quantity on order
 
 https://www.geeksengine.com/database/problem-solving/northwind-queries-part-1.php
 
 https://habr.com/ru/company/ruvds/blog/436884/
-
-
-[How to: Add Query Options to a Data Service Query](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-add-query-options-to-a-data-service-query-wcf-data-services)
