@@ -81,11 +81,11 @@ $ type nul > ReportingApp\.editorconfig
 6. Создайте пустые файлы для сервиса отчетов _ProductReportService_ в каталоге _ProductReports_.
 
 ```sh
-$ type nul > Northwind.ReportingServices.OData\ProductReports\Product.cs
+$ type nul > Northwind.ReportingServices.OData\ProductReports\ProductPrice.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReport.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportService.cs
 ```
-Заполните содержимое - [Product.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/Product.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices/ProductReports/ProductReportService.cs).
+Заполните содержимое - [Product.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductPrice.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices/ProductReports/ProductReportService.cs).
 
 Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps/).
 
