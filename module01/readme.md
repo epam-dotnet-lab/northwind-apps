@@ -45,7 +45,8 @@
 		* Серия видео [Postman "How To"](https://www.youtube.com/playlist?list=PLM-7VG-sgbtCJYpjQfmLCcJZ6Yd74oytQ).
 		* Видео [Postman: от простого API-теста до конечного сценария"](https://www.youtube.com/watch?v=hGmJMeE_ok0).
 3. Изучите основы OData с использованием руководства [Understand OData in 6 steps](https://www.odata.org/getting-started/understand-odata-in-6-steps/).
-4. Используйте статью [Learning OData on Postman](https://www.odata.org/getting-started/learning-odata-on-postman/), чтобы добавить в Postman коллекцию для работы с сервисом _TripPin_.
+4. Используйте статью [Learning OData on Postman](https://www.odata.org/getting-started/learning-odata-on-postman/), чтобы добавить в Postman коллекцию "Postman OData Tutorial" для работы с сервисом _TripPin_.
+5. Добавьте в Postman коллекцию "Trippin Basic Usages" из раздела [Basic Usages](https://www.odata.org/odata-services/).
 5. Изучите [модель данных сервиса TripPin](https://www.odata.org/blog/trippin-new-odata-v4-sample-service/).
 6. Пройдите [Basic Tutorial](https://www.odata.org/getting-started/basic-tutorial).
 
