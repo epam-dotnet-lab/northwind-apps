@@ -85,9 +85,7 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductPrice.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReport.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportService.cs
 ```
-Заполните содержимое - [ProductPrice.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductPrice.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReportService.cs).
-
-Замените _Program.cs_ на [Program.cs](ReportingApps/ReportingApp/Program.cs).
+Заполните содержимое - [ProductPrice.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductPrice.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReportService.cs). Замените _Program.cs_ на [Program.cs](ReportingApps/ReportingApp/Program.cs).
 
 Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps/).
 
@@ -98,9 +96,9 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 
 1. Скачайте и установите [Fiddler](https://www.telerik.com/fiddler).
 2. Изучите:
-* [Скриптуемый отладочный прокси Fiddler](https://learn.javascript.ru/fiddler)
-* [Getting Started with Fiddler Web Debugging Proxy](https://www.youtube.com/watch?v=gujBKFGwjd4)
-* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU)
+	* [Скриптуемый отладочный прокси Fiddler](https://learn.javascript.ru/fiddler)
+	* [Getting Started with Fiddler Web Debugging Proxy](https://www.youtube.com/watch?v=gujBKFGwjd4)
+	* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU)
 
 
 ### Задание 3. Запрос данных с OData-сервиса.
@@ -108,8 +106,8 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 #### Выполнение
 
 1. Изучите статьи про асинхронную работу с сервисом:
-* [Asynchronous Operations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/asynchronous-operations-wcf-data-services)
-* [How to: Execute Asynchronous Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-asynchronous-data-service-queries-wcf-data-services)
+	* [Asynchronous Operations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/asynchronous-operations-wcf-data-services)
+	* [How to: Execute Asynchronous Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-asynchronous-data-service-queries-wcf-data-services)
 
 Получите данные по товарам - замените код _ProductReportService.GetCurrentProducts_:
 
@@ -140,8 +138,8 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 Запустите приложение и найдите в Fiddler запрос данных с OData-сервиса.
 
 2. Изучите статьи про запросы данных из сервиса: 
-* [Querying the Data Service](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/querying-the-data-service-wcf-data-services)
-* [How to: Execute Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-data-service-queries-wcf-data-services)
+	* [Querying the Data Service](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/querying-the-data-service-wcf-data-services)
+	* [How to: Execute Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-data-service-queries-wcf-data-services)
 
 Напишите LINQ-запрос для выборки всех текущих товаров (не discontinued) и сделайте нисходящую сортировку списка по полю _ProductName_:
 
