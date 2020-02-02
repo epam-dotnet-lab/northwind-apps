@@ -29,7 +29,24 @@ namespace Northwind.ReportingServices.OData.ProductReports
         /// <returns>Returns <see cref="ProductReport{T}"/>.</returns>
         public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
         {
-            return new ProductReport<ProductPrice>(Array.Empty<ProductPrice>());
+            var query = (DataServiceQuery<ProductPrice>)(
+                            from p in this.entities.Products
+                            where !p.Discontinued
+                            orderby p.ProductName
+                            select new ProductPrice
+                            {
+                                Name = p.ProductName,
+                                Price = p.UnitPrice ?? 0,
+                            });
+
+            var result = await Task<IEnumerable<ProductPrice>>.Factory.FromAsync(query.BeginExecute(null, null), (ar) =>
+            {
+                return query.EndExecute(ar);
+            });
+
+            return new ProductReport<ProductPrice>(result);
+            //
+            //            return new ProductReport<ProductPrice>(Array.Empty<ProductPrice>());
         }
 
         /// <summary>

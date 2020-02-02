@@ -92,16 +92,104 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps/).
 
 
-### Задание 2. Запрос данных с OData-сервиса.
+### Задание 2. Работа с Fiddler
 
 #### Выполнение
 
-ReportingApp
-()
+1. Скачайте и установите [Fiddler](https://www.telerik.com/fiddler).
+2. Изучите:
+* [Скриптуемый отладочный прокси Fiddler](https://learn.javascript.ru/fiddler)
+* [Getting Started with Fiddler Web Debugging Proxy](https://www.youtube.com/watch?v=gujBKFGwjd4)
+* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU)
 
-Northwind.ReportingServices
 
+### Задание 3. Запрос данных с OData-сервиса.
 
+#### Выполнение
+
+1. Изучите статьи про асинхронную работу с сервисом:
+* [Asynchronous Operations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/asynchronous-operations-wcf-data-services)
+* [How to: Execute Asynchronous Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-asynchronous-data-service-queries-wcf-data-services)
+
+Получите данные по товарам - замените код _ProductReportService.GetCurrentProducts_:
+
+```cs
+public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
+{
+    var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products;
+
+    var result = await Task<IEnumerable<NorthwindProduct>>.Factory.FromAsync(query.BeginExecute(null, null), (ar) =>
+    {
+        return query.EndExecute(ar);
+    });
+
+    var productPrices = new List<ProductPrice>();
+    foreach (var product in result)
+    {
+        productPrices.Add(new ProductPrice
+        {
+            Name = product.ProductName,
+            Price = product.UnitPrice ?? 0,
+        });
+    }
+
+    return new ProductReport<ProductPrice>(productPrices);
+}
+```
+
+Запустите приложение и найдите в Fiddler запрос данных с OData-сервиса.
+
+2. Изучите статьи про запросы данных из сервиса: 
+* [Querying the Data Service](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/querying-the-data-service-wcf-data-services)
+* [How to: Execute Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-data-service-queries-wcf-data-services)
+
+Напишите LINQ-запрос для выборки всех текущих товаров (не discontinued) и сделайте нисходящую сортировку списка по полю _ProductName_:
+
+```cs
+var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.Where(p => !p.Discontinued).OrderBy(p => p.ProductName);
+```
+
+Запустите приложение и исследуйте в Fiddler запрос данных с OData-сервиса.
+
+3. Изучите статью [LINQ Considerations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/linq-considerations-wcf-data-services) и перепишите запрос с применением синтаксиса запроса:
+
+```cs
+var query = (DataServiceQuery<NorthwindProduct>)(
+                from p in this.entities.Products
+                where !p.Discontinued
+                orderby p.ProductName
+                select p);
+```
+
+Запустите приложение, найдите в Fiddler ответ сервиса в XML-формате.
+
+4. Изучите статью [Query Projections](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/query-projections-wcf-data-services)
+
+Используйте проекцию для получения имени и цены единицы товара:
+
+```cs
+public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
+{
+    var query = (DataServiceQuery<ProductPrice>)(
+                    from p in this.entities.Products
+                    where !p.Discontinued
+                    orderby p.ProductName
+                    select new ProductPrice
+                    {
+                        Name = p.ProductName,
+                        Price = p.UnitPrice ?? 0,
+                    });
+
+    var result = await Task<IEnumerable<ProductPrice>>.Factory.FromAsync(query.BeginExecute(null, null), (ar) =>
+    {
+        return query.EndExecute(ar);
+    });
+
+    return new ProductReport<ProductPrice>(result);
+}
+```
+
+Запустите приложение, найдите в Fiddler ответ сервиса и сравните с предыдущим запросом.
 
 Query, product (id, name, unit price) where current (not discontinued) and product cost less than $20.
 
@@ -118,13 +206,4 @@ https://www.geeksengine.com/database/problem-solving/northwind-queries-part-1.ph
 https://habr.com/ru/company/ruvds/blog/436884/
 
 
-[Querying the Data Service](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/querying-the-data-service-wcf-data-services)
-[How to: Execute Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-data-service-queries-wcf-data-services)
 [How to: Add Query Options to a Data Service Query](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-add-query-options-to-a-data-service-query-wcf-data-services)
-[Query Projections](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/query-projections-wcf-data-services)
-[LINQ Considerations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/linq-considerations-wcf-data-services)
-
-[Asynchronous Operations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/asynchronous-operations-wcf-data-services)
-[How to: Execute Asynchronous Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-asynchronous-data-service-queries-wcf-data-services)
-
-[Скриптуемый отладочный прокси Fiddler](https://learn.javascript.ru/fiddler)
