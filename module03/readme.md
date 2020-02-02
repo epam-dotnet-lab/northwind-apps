@@ -12,7 +12,7 @@
 
 [WCF](https://docs.microsoft.com/en-us/dotnet/framework/wcf/) - это фреймворк, который в прошлом широко использовался для [построения распределенных приложений](http://sergeyteplyakov.blogspot.com/2011/02/wcf.html) на базе платформы .NET. Существует много рабочих приложений, которые построены на его основе и успешно работают. На текущий момент [популярность фреймворка сильно упала](https://github.com/dotnet/wcf/issues/1784), однако поддержка работающих сервисов и работа с ними по-прежнему является актуальной задачей для крупных промышленных программных систем.
 
-Url сервиса выглядит следующим образом:
+URL Northwind (v3) OData-сервиса выглядит следующим образом:
 
 ```
 https://services.odata.org/V3/Northwind/Northwind.svc/
@@ -22,7 +22,6 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
 
 ### Задание 1. Создание каркаса приложения отчетов
-
 
 #### Выполнение
 
@@ -190,6 +189,8 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 ```
 
 Запустите приложение, найдите в Fiddler ответ сервиса и сравните с предыдущим запросом.
+
+
 
 Query, product (id, name, unit price) where current (not discontinued) and product cost less than $20.
 
