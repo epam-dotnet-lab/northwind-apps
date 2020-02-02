@@ -135,7 +135,7 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 }
 ```
 
-Запустите приложение и найдите в Fiddler запрос данных с OData-сервиса.
+Запустите приложение и найдите в Fiddler соответствующий запрос.
 
 2. Изучите статьи про запросы данных из сервиса: 
 	* [Querying the Data Service](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/querying-the-data-service-wcf-data-services).
@@ -147,7 +147,7 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.Where(p => !p.Discontinued).OrderBy(p => p.ProductName);
 ```
 
-Запустите приложение и исследуйте в Fiddler запрос данных с OData-сервиса.
+Исследуйте в Fiddler соответствующий запрос.
 
 3. Изучите статью [LINQ Considerations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/linq-considerations-wcf-data-services) и перепишите запрос с применением синтаксиса запроса:
 
@@ -159,7 +159,7 @@ var query = (DataServiceQuery<NorthwindProduct>)(
                 select p);
 ```
 
-Запустите приложение, найдите в Fiddler ответ сервиса в XML-формате.
+Найдите в Fiddler ответ сервиса в XML-формате.
 
 4. Изучите статью [Query Projections](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/query-projections-wcf-data-services)
 
