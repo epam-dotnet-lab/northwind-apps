@@ -20,6 +20,8 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
 ### Задание 1. Создание каркаса приложения отчетов
 
+Научитесь создавать консольные приложения .NET Core с подключенными статическими анализаторами кода.
+
 #### Выполнение
 
 1. Создайте консольное приложение _ReportingApp_ и библиотеку классов _Northwind.ReportingServices.OData_ в решении _ReportingApps_.
@@ -88,6 +90,8 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 
 ### Задание 2. Работа с Fiddler
 
+Освойте базовые функции Fiddler.
+
 #### Выполнение
 
 1. Скачайте и установите [Fiddler](https://www.telerik.com/fiddler).
@@ -97,7 +101,9 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 	* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU).
 
 
-### Задание 3. Запрос данных из OData-сервиса.
+### Задание 3. LINQ-запросы
+
+Научитесь использовать LINQ для создания запросов к OData-сервисам.
 
 #### Выполнение
 
@@ -185,10 +191,12 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 
 Найдите в Fiddler ответ сервиса и сравните с предыдущим запросом.
 
-5. Реализуйте метод _ProductReportService.GetMostExpensiveProductsReport_, используя проекцию:
+5. Реализуйте метод _ProductReportService.GetMostExpensiveProductsReport_.
+
+Используйте проекцию вместо _NorthwindProduct_:
 
 ```cs
-var query = (DataServiceQuery<ProductPrice>)this.entities.Products.
+var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.
     Where(p => p.UnitPrice != null).
     OrderByDescending(p => p.UnitPrice.Value).
     Take(count);
@@ -201,17 +209,45 @@ var query = (DataServiceQuery<ProductPrice>)this.entities.Products.
 
 ### Задание 4. Дополнительные отчеты
 
+Добавьте в приложение дополнительные отчеты.
+
 #### Выполнение
 
-Query, product (id, name, unit price) where current (not discontinued) and product cost less than $20.
+1. Добавьте новый отчет "price-less-then-products", который будет возвращать текущие товары с ценой меньше указанной в параметрах.
 
-Query, product (id, name, unit price) where current (not discontinued) and product cost between $15 and $25
+Пример использования:
 
-Query, product (id, name, unit price) of above average price.
+```sh
+$ ReportingApp.exe price-less-then-products 20.00
+Report - products with price less then 20.00:
+Product2, 10.01
+Product1, 15.00
+```
 
+2. Добавьте новый отчет "price-between-products", который будет возвращать текущие товары с ценой, которая находится между нижним и верхним параметром.
 
-Write a query to get Product list (name, units on order , units in stock) of stock is less than the quantity on order
+Пример использования:
 
-https://www.geeksengine.com/database/problem-solving/northwind-queries-part-1.php
+```sh
+$ ReportingApp.exe price-between-products 20.05 60.05
+Report - products with price between 20.05 and 60.05:
+Product1, 21.15
+Product3, 34.01
+Product1, 59.00
+```
 
-https://habr.com/ru/company/ruvds/blog/436884/
+3. Добавьте новый отчет "price-above-average-products", который будет возвращать текущие товары с ценой, которая выше средней цены всех товаров.
+
+Пример использования:
+
+```sh
+$ ReportingApp.exe price-above-average-products
+Report - products with price above average:
+Product2, 84.91
+Product1, 68.93
+Product3, 59.01
+```
+
+4. Добавьте новый отчет "units-in-stock-deficit", который будет возвращать список всех товаров для которых количество UnitsInStock будет меньше чем количество UnitsOnOrder.
+
+5. Придумайте и реализуйте 3 дополнительных отчета, для реализации который примените неиспользованные методы LINQ.

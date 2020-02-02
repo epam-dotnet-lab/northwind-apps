@@ -61,7 +61,7 @@ namespace ReportingApp
         {
             var service = new ProductReportService(new Uri(NorthwindServiceUrl));
             var report = await service.GetCurrentProducts();
-            PrintProductReport("Current products:", report);
+            PrintProductReport("current products:", report);
         }
 
         private static async Task ShowMostExpensiveProducts(int count)
@@ -73,7 +73,7 @@ namespace ReportingApp
 
         private static void PrintProductReport(string header, ProductReport<ProductPrice> productReport)
         {
-            Console.WriteLine($"Report: {header}");
+            Console.WriteLine($"Report - {header}");
             foreach (var reportLine in productReport.Products)
             {
                 Console.WriteLine("{0}, {1}", reportLine.Name, reportLine.Price);
