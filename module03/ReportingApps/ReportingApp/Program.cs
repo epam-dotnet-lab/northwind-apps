@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Northwind.ReportingServices.ProductReports;
+using Northwind.ReportingServices.OData.ProductReports;
 
 namespace ReportingApp
 {

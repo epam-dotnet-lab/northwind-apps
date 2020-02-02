@@ -21,12 +21,12 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 Наличие [".svc" в пути сервиса](https://stackoverflow.com/questions/17363429/does-a-wcf-service-always-use-an-svc-file) намекает на реализацию сервиса с помощью WCF.
 
 
-### Задание 1. Отчеты
+### Задание 1. Создание каркаса приложения отчетов
 
 
 #### Выполнение
 
-1. Создайте консольное приложение _ReportingApp_ и библиотеку классов _Northwind.ReportingServices.OData_ в общем решении _ReportingApps_.
+1. Создайте консольное приложение _ReportingApp_ и библиотеку классов _Northwind.ReportingServices.OData_ в решении _ReportingApps_.
 
 ```sh
 $ mkdir ReportingApps
@@ -60,7 +60,7 @@ $ type nul > Northwind.ReportingServices.OData\.editorconfig
 $ type nul > ReportingApp\.editorconfig
 ```
 
-Заполните содержимое - [code-analysis.ruleset](ReportingApps/code-analysis.ruleset), [stylecop.json](ReportingApps\stylecop.json), [.editorconfig решения](ReportingApps/.editorconfig) и [.editorconfig проектов](ReportingApps/ReportingApp/.editorconfig).
+Заполните содержимое - [code-analysis.ruleset](ReportingApps/code-analysis.ruleset), [stylecop.json](ReportingApps/stylecop.json), [.editorconfig решения](ReportingApps/.editorconfig) и [.editorconfig проектов](ReportingApps/ReportingApp/.editorconfig).
 
 4. Добавьте в файлы проектов ссылки на файлы настроек и подключите статические анализаторы кода:
 
@@ -87,10 +87,14 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 ```
 Заполните содержимое - [ProductPrice.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductPrice.cs), [ProductReport.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReport.cs), [ProductReportService.cs](ReportingApps/Northwind.ReportingServices.OData/ProductReports/ProductReportService.cs).
 
+Замените _Program.cs_ на [Program.cs](ReportingApps/ReportingApp/Program.cs).
+
 Проект должен выглядеть следующим образом - [ReportingApps](ReportingApps/).
 
-7. 
 
+### Задание 2. Запрос данных с OData-сервиса.
+
+#### Выполнение
 
 ReportingApp
 ()

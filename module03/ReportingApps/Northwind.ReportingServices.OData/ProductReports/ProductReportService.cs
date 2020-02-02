@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using NorthwindProduct = NorthwindModel.Product;
 
-namespace Northwind.ReportingServices.ProductReports
+namespace Northwind.ReportingServices.OData.ProductReports
 {
     /// <summary>
     /// Represents a service that produces product-related reports.

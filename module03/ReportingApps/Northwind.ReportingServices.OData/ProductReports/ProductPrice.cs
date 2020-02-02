@@ -1,4 +1,4 @@
-﻿namespace Northwind.ReportingServices.ProductReports
+﻿namespace Northwind.ReportingServices.OData.ProductReports
 {
     /// <summary>
     /// Represents a product report line.
