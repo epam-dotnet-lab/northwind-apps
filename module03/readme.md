@@ -26,6 +26,8 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
 1. Создайте консольное приложение _ReportingApp_ и библиотеку классов _Northwind.ReportingServices.OData_ в решении _ReportingApps_.
 
+![ReportingApps Solution Structure](reportingapps-solution-structure.png)
+
 ```sh
 $ mkdir ReportingApps
 $ cd ReportingApps
@@ -79,6 +81,7 @@ $ type nul > ReportingApp\.editorconfig
 6. Создайте пустые файлы для сервиса отчетов _ProductReportService_ в каталоге _ProductReports_.
 
 ```sh
+$ mkdir Northwind.ReportingServices.OData\ProductReports
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductPrice.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReport.cs
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportService.cs
@@ -101,7 +104,7 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 	* Дополнительно: [Fiddler - подробный разбор](https://www.youtube.com/watch?v=YPg18W7O8aU).
 
 
-### Задание 3. LINQ-запросы
+### Задание 3. LINQ-запросы для OData-сервисов
 
 Научитесь использовать LINQ для создания запросов к OData-сервисам.
 
@@ -111,10 +114,10 @@ $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductReportServi
 	* [Asynchronous Operations](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/asynchronous-operations-wcf-data-services)
 	* [How to: Execute Asynchronous Data Service Queries](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-execute-asynchronous-data-service-queries-wcf-data-services)
 
-Получите данные по товарам - замените код _ProductReportService.GetCurrentProducts_:
+Получите данные по товарам - замените код _ProductReportService.GetCurrentProductsReport_:
 
 ```cs
-public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
+public async Task<ProductReport<ProductPrice>> GetCurrentProductsReport()
 {
     var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products;
 
@@ -168,7 +171,7 @@ var query = (DataServiceQuery<NorthwindProduct>)(
 Используйте проекцию для получения имени и цены единицы товара:
 
 ```cs
-public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
+public async Task<ProductReport<ProductPrice>> GetCurrentProductsReport()
 {
     var query = (DataServiceQuery<ProductPrice>)(
         from p in this.entities.Products
@@ -193,7 +196,7 @@ public async Task<ProductReport<ProductPrice>> GetCurrentProducts()
 
 5. Реализуйте метод _ProductReportService.GetMostExpensiveProductsReport_.
 
-Используйте проекцию вместо _NorthwindProduct_:
+Используйте проекцию _ProductPrice_ вместо _NorthwindProduct_:
 
 ```cs
 var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.
@@ -202,7 +205,7 @@ var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.
     Take(count);
 ```
 
-6. Метод _ProductReportService.GetCurrentProducts_ возвращает неполный список товаров. Количество элементов в списке ограничено количеством элементов, которое сервис возвращает за один запрос. См. статьи [Loading Deferred Content](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/loading-deferred-content-wcf-data-services) и [How to: Load Paged Results](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-load-paged-results-wcf-data-services). Используйте метод [GetContinuation](https://docs.microsoft.com/en-us/dotnet/api/system.data.services.client.queryoperationresponse-1.getcontinuation), чтобы получить полный список товаров из сервиса.
+6. Метод _ProductReportService.GetCurrentProductsReport_ возвращает неполный список товаров. Количество элементов в списке ограничено количеством элементов, которое сервис возвращает за один запрос. См. статьи [Loading Deferred Content](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/loading-deferred-content-wcf-data-services) и [How to: Load Paged Results](https://docs.microsoft.com/en-us/dotnet/framework/data/wcf/how-to-load-paged-results-wcf-data-services). Используйте метод [GetContinuation](https://docs.microsoft.com/en-us/dotnet/api/system.data.services.client.queryoperationresponse-1.getcontinuation), чтобы получить полный список товаров из сервиса.
 
 Найдите в Fiddler соответствующие запросы.
 
@@ -218,7 +221,7 @@ var query = (DataServiceQuery<NorthwindProduct>)this.entities.Products.
 Пример использования:
 
 ```sh
-$ ReportingApp.exe price-less-then-products 20.00
+$ .\ReportingApp.exe price-less-then-products 20.00
 Report - products with price less then 20.00:
 Product2, 10.01
 Product1, 15.00
@@ -229,7 +232,7 @@ Product1, 15.00
 Пример использования:
 
 ```sh
-$ ReportingApp.exe price-between-products 20.05 60.05
+$ .\ReportingApp.exe price-between-products 20.05 60.05
 Report - products with price between 20.05 and 60.05:
 Product1, 21.15
 Product3, 34.01
@@ -241,7 +244,7 @@ Product1, 59.00
 Пример использования:
 
 ```sh
-$ ReportingApp.exe price-above-average-products
+$ .\ReportingApp.exe price-above-average-products
 Report - products with price above average:
 Product2, 84.91
 Product1, 68.93
@@ -251,3 +254,134 @@ Product3, 59.01
 4. Добавьте новый отчет "units-in-stock-deficit", который будет возвращать список всех товаров для которых количество UnitsInStock будет меньше чем количество UnitsOnOrder.
 
 5. Придумайте и реализуйте 3 дополнительных отчета, для реализации который примените неиспользованные методы LINQ.
+
+
+### Задание 5. REST-сервисы
+
+[Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/)
+
+#### Выполнение
+
+1. Добавьте библиотеку классов _Northwind.CurrencyServices_ и подключите анализаторы кода.
+
+![CurrencyServices in ReportingApps Solution](reportingapps-currencyservices.png)
+
+```sh
+$ dotnet new classlib --name Northwind.CurrencyServices
+$ dotnet sln ReportingApps.sln add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj
+$ dotnet add ReportingApp\ReportingApp.csproj reference Northwind.CurrencyServices\Northwind.CurrencyServices.csproj
+$ dotnet add Northwind.ReportingServices.OData\Northwind.ReportingServices.OData.csproj reference Northwind.CurrencyServices\Northwind.CurrencyServices.csproj
+$ dotnet add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj package System.Text.Json
+$ dotnet add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj package Microsoft.CodeAnalysis.FxCopAnalyzers
+$ dotnet add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj package StyleCop.Analyzers
+```
+
+2. Создайте пустые файлы для новых сервисов.
+
+```sh
+$ mkdir Northwind.CurrencyServices\CurrencyExchange
+$ type nul > Northwind.CurrencyServices\CurrencyExchange\CurrencyExchangeService.cs
+$ mkdir Northwind.CurrencyServices\CountryCurrency
+$ type nul > Northwind.CurrencyServices\CountryCurrency\LocalCurrency.cs
+$ type nul > Northwind.CurrencyServices\CountryCurrency\CountryCurrencyService.cs
+$ type nul > Northwind.ReportingServices.OData\ProductReports\ProductLocalPrice.cs
+```
+
+3. Изучите статьи:
+	* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
+	* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
+
+4. Реализуйте сервис _CurrencyExchangeService_, который будет получать актуальные данные курсов обмена валют из сервиса [CurrencyLayer](https://currencylayer.com/).
+
+Добавьте код в _CurrencyExchangeService.cs_:
+
+```cs
+public class CurrencyExchangeService
+{
+    private readonly string accessKey;
+
+    public CurrencyExchangeService(string accesskey)
+    {
+       this.accessKey = !string.IsNullOrWhiteSpace(accesskey) ? accesskey : throw new ArgumentException("Access key is invalid.", nameof(accesskey));
+    }
+
+    public async Task<decimal> GetCurrencyExchangeRate(string baseCurrency, string exchangeCurrency)
+    {
+        throw new NotImplementedException("Implement GetCurrencyExchangeRate.");
+    }
+}
+```
+
+Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
+
+5. Реализуйте сервис _CountryCurrencyService_, который должен возвращать данные локальных валют по имени страны из сервиса [RestCountries](http://restcountries.eu/).
+
+Добавьте код в _LocalCurrency.cs_:
+
+```cs
+public class LocalCurrency
+{
+    public string CountryName { get; set; }
+    public string CurrencyCode { get; set; }
+    public string CurrencySymbol { get; set; }
+}
+```
+
+Добавьте код в _CountryCurrencyService.cs_:
+
+```cs
+public class CountryCurrencyService
+{
+    public async Task<LocalCurrency> GetLocalCurrencyByCountry(string countryName)
+    {
+    	throw new NotImplementedException("Implement GetLocalCurrencyByCountry.");
+    }
+}
+```
+
+Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
+
+6. 
+
+
+Добавьте код в _ProductLocalPrice.cs_:
+
+```cs
+public class ProductLocalPrice
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public string Country { get; set; }
+    public decimal LocalPrice { get; set; }
+    public string CurrencySymbol { get; set; }
+}
+```
+
+Добавьте новый метод в _ProductReportService_:
+
+```cs
+public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalCurrencyReport()
+{
+    var countryCurrencyService = new CountryCurrencyService();
+    var currencyExchangeService = new CurrencyExchangeService("<your api-key>");
+
+    throw new NotImplementedException("Implement GetCurrentProductsWithLocalCurrencyReport.");
+}
+```
+
+7. 
+
+
+
+Пример использования:
+
+```sh
+$ .\ReportingApp.exe 
+Report - current products with local price:
+Aniseed Syrup, 10$, United Kingdom of Great Britain and Northern Ireland, 08?
+Boston Crab Meat, 18$, United States of America, 18$
+Camembert Pierrot, 34$, France, 31?
+Carnarvon Tigers, 63$, Australia, 93$
+Chai, 18$, United Kingdom of Great Britain and Northern Ireland, 14?
+...
+```

@@ -27,6 +27,9 @@
     <PackageReference Include="System.Spatial" Version="5.8.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Northwind.CurrencyServices\Northwind.CurrencyServices.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>
