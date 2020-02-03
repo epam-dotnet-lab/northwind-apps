@@ -16,6 +16,8 @@ https://services.odata.org/V3/Northwind/Northwind.svc/
 
 * Научиться использовать LINQ для построения запросов данных.
 * Научиться использовать Fiddler для инспекции HTTP/HTTPS-трафика.
+* Научиться получать данные из внешних REST-сервисов, используя _HttpClient_.
+* Научиться десериализовывать поток данных, используя _JsonSerializer_.
 
 
 ### Задание 1. Создание каркаса приложения отчетов
@@ -258,7 +260,7 @@ Product3, 59.01
 
 ### Задание 5. REST-сервисы
 
-См. статью [Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/).
+Добавьте в приложение новый отчет, который будет отображать список текущих продуктов с указанием цены товара в локальной валюте страны происхождения поставщика товара. Цена товара, которую предоставляет сервис Northwind, номинирована в долларах. Используйте сервис [RestCountries](http://restcountries.eu/), чтобы получить данные о стране, в том числе локальную валюту. Для получения актуальныъ курсов валют используйте сервис [CurrencyLayer](https://currencylayer.com/) (для доступа к сервису необходима регистрация). Механику работы с сервисами см. в статье [Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/).
 
 #### Выполнение
 
@@ -311,8 +313,8 @@ public class CurrencyExchangeService
 ```
 
 Изучите статьи:
-* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
-* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
+* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient).
+* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to).
 
 Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
 
