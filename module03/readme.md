@@ -397,7 +397,7 @@ Chai, 18$, United Kingdom of Great Britain and Northern Ireland, 14?
 ```
 
 
-### Задание 6. Рефакторинг
+### Задание 6. Внедрение зависимостей
 
 #### Выполнение
 
@@ -446,7 +446,7 @@ public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalC
 
 ![Dependencies of ProductReportService with interfaces](productreportservice-interfaces.png)
 
-Зависит ли теперь класс _ProductReportService_ от классов _CountryCurrencyService_ и _CurrencyExchangeService_?s
+См. статью [Dependency injection](https://habr.com/ru/post/350068/). Зависит ли теперь класс _ProductReportService_ от классов _CountryCurrencyService_ и _CurrencyExchangeService_?
 
 5. Добавьте библиотеку классов _Northwind.ReportingServices_, подключите анализаторы кода, настройте анализаторы кода и IDE.
 
@@ -470,7 +470,7 @@ $ mkdir Northwind.ReportingServices\ProductReports
 $ type nul > Northwind.ReportingServices\ProductReports\IProductReportService.cs
 ```
 
-[Извлеките методы класса](https://refactoring.guru/ru/extract-interface) _ProductReportService_ в интерфейс _IProductReportService_. Реализуйте интерфейс в классе сервиса.
+[Извлеките методы класса](https://refactoring.guru/ru/extract-interface) _ProductReportService_ в интерфейс _IProductReportService_. Реализуйте интерфейс в классе сервиса. Переместите зависимые классы в сборку _Northwind.ReportingService_.
 
 7. Проанализируйте зависимости:
 
@@ -509,10 +509,31 @@ class CurrentProductLocalPriceReport
 
 ![CurrentProductLocalPriceReport](currentproductlocalpricereport.png)
 
-Какие зависимости имеет класс _CurrentProductLocalPriceReport_?
+10. Какие зависимости имеет класс _CurrentProductLocalPriceReport_?
 
 Прочтите про _Composition Root_:
 * [Understanding the Composition Root](https://freecontent.manning.com/dependency-injection-in-net-2nd-edition-understanding-the-composition-root/)
 * [Composition Root](https://blog.ploeh.dk/2011/07/28/CompositionRoot/)
 
 Найдите Composition Root в приложении.
+
+
+### Задание 7. RDBMS
+
+_Задание в процессе разработки._
+
+#### Выполнение
+
+1. Установите [LocalDB](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/sql-server-express-localdb) в Visual Studio Installer.
+
+2. Создайте новую БД _Northwind_ в [SQL Server Object Explorer](https://tonystrafford.co.uk/localdb-for-developers/).
+
+3. Создайте структуру БД, используя SQL Script [instnwnd.sql](https://github.com/microsoft/sql-server-samples/blob/master/samples/databases/northwind-pubs/instnwnd.sql) (начало скрипта удалить до CREATE TABLE).
+
+4. Добавьте библиотеку классов _Northwind.ReportingServices.SqlService_.
+
+![Northwind.ReportingServices.SqlService](reportingservices-sqlserver.png)
+
+5. Добавьте файл _ProductReports\ProductReportService.cs_ для нового сервиса, который будет получать данные из БД Northwind.
+
+6. Реализуйте методы сервиса, которые будут получать данные из RDBMS Northwind через ADO.NET и возвращать готовый отчет.
