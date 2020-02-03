@@ -311,8 +311,8 @@ public class CurrencyExchangeService
 ```
 
 Изучите статьи:
-	* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
-	* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
+* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
+* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
 
 Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
 
@@ -375,11 +375,11 @@ public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalC
 7. Добавьте в класс _Program_ поддержку нового отчета с именем "current-products-local-prices".
 
 Отчет должен выводить:
-	* Название товара.
-	* Цену товара в долларах.
-	* Полное название страны производителя (из внешнего сервиса).
-	* Цену товара в локальной валюте страны производителя.
-	* Символ валюты страны производителя.
+* Название товара.
+* Цену товара в долларах.
+* Полное название страны производителя (из внешнего сервиса).
+* Цену товара в локальной валюте страны производителя.
+* Символ валюты страны производителя (большинство символов будет выведено на консоль как "?").
 
 Пример использования:
 
