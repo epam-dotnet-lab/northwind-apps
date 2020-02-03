@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Northwind.CurrencyServices.CountryCurrency;
-using Northwind.CurrencyServices.CurrencyExchange;
 using Northwind.ReportingServices.OData.ProductReports;
 
 namespace ReportingApp
@@ -33,22 +30,6 @@ namespace ReportingApp
 
             if (string.Equals(reportName, CurrentProductsReport, StringComparison.InvariantCultureIgnoreCase))
             {
-                var service = new ProductReportService(new Uri(NorthwindServiceUrl));
-
-                var countryService = new Northwind.CurrencyServices.CountryCurrency.CountryCurrencyService();
-                /*
-                                var countries = await service.Get();
-
-                                Dictionary<string, CountryInfo> dict = new Dictionary<string, CountryInfo>();
-
-                                foreach (var country in countries)
-                                {
-                                    var countryInfo = await countryService.Lookup(country);
-                                    dict.Add(country, countryInfo);
-                                }
-                */
-                //await countryService.GetCurrencyInfo();
-
                 await ShowCurrentProducts();
                 return;
             }
@@ -79,10 +60,7 @@ namespace ReportingApp
         private static async Task ShowCurrentProducts()
         {
             var service = new ProductReportService(new Uri(NorthwindServiceUrl));
-            var countryCurrencyService = new CountryCurrencyService();
-            var currencyExchangeService = new CurrencyExchangeService("cd4c05ecaa6787738809c8d290c5acc5");
-
-            var report = await service.GetCurrentProductsWithLocalCurrencyReport(countryCurrencyService, currencyExchangeService);
+            var report = await service.GetCurrentProducts();
             PrintProductReport("current products:", report);
         }
 
@@ -99,15 +77,6 @@ namespace ReportingApp
             foreach (var reportLine in productReport.Products)
             {
                 Console.WriteLine("{0}, {1}", reportLine.Name, reportLine.Price);
-            }
-        }
-
-        private static void PrintProductReport(string header, ProductReport<ProductLocalPrice> productReport)
-        {
-            Console.WriteLine($"Report - {header}");
-            foreach (var reportLine in productReport.Products)
-            {
-                Console.WriteLine("{0}, {1:00}$, {2}, {3:00}{4}", reportLine.Name, reportLine.Price, reportLine.Country, reportLine.LocalPrice, reportLine.CurrencySymbol);
             }
         }
     }

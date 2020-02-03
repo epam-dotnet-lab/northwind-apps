@@ -24,7 +24,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Northwind.ReportingServices.OData\Northwind.ReportingServices.OData.csproj" />
-    <ProjectReference Include="..\Northwind.CurrencyServices\Northwind.CurrencyServices.csproj" />
-    <ProjectReference Include="..\Northwind.ReportingServices\Northwind.ReportingServices.csproj" />
   </ItemGroup>
 </Project>
