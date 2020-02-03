@@ -448,7 +448,7 @@ public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalC
 
 Зависит ли теперь класс _ProductReportService_ от классов _CountryCurrencyService_ и _CurrencyExchangeService_?s
 
-5. Добавьте библиотеку классов _Northwind.ReportingServices_, подключите анализаторы кода, настройте анализаторы и IDE.
+5. Добавьте библиотеку классов _Northwind.ReportingServices_, подключите анализаторы кода, настройте анализаторы кода и IDE.
 
 ```sh
 $ dotnet new classlib --name Northwind.ReportingServices
