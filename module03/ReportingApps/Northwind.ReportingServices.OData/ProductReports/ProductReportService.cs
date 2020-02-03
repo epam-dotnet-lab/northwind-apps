@@ -12,7 +12,7 @@ namespace Northwind.ReportingServices.OData.ProductReports
     /// <summary>
     /// Represents a service that produces product-related reports.
     /// </summary>
-    public class ProductReportService
+    public class ProductReportService : IProductReportService
     {
         private readonly NorthwindModel.NorthwindEntities entities;
 

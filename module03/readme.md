@@ -459,6 +459,8 @@ $ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj pack
 $ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj package StyleCop.Analyzers
 ```
 
+Зависимости проектов выглядят следующим образом:
+
 ![Northwind.ReportingServices in ReportingApps Solution](reportingapps-reportingservices.png)
 
 6. Добавьте пустой файл интерфейса _IProductReportService_:
@@ -474,3 +476,43 @@ $ type nul > Northwind.ReportingServices\ProductReports\IProductReportService.cs
 
 ![Extract Interface from ProductReportService](productreportservice-extract-interface.png)
 
+8. Добавьте в _ReportingApp_ новый класс _CurrentProductLocalPriceReport_, который отвечает за печать отчета.
+
+```sh
+type nul > ReportingApp\CurrentProductLocalPriceReport.cs
+```
+
+Добавьте код в файлд _CurrentProductLocalPriceReport.cs_:
+
+```cs
+class CurrentProductLocalPriceReport
+{
+    private readonly IProductReportService productReportService;
+    private readonly ICurrencyExchangeService currencyExchangeService;
+    private readonly ICountryCurrencyService countryCurrencyService;
+
+    public CurrentProductLocalPriceReport(IProductReportService productReportService, ICurrencyExchangeService currencyExchangeService, ICountryCurrencyService countryCurrencyService)
+    {
+        this.productReportService = productReportService ?? throw new ArgumentNullException(nameof(productReportService));
+        this.currencyExchangeService = currencyExchangeService ?? throw new ArgumentNullException(nameof(currencyExchangeService));
+        this.countryCurrencyService = countryCurrencyService ?? throw new ArgumentNullException(nameof(countryCurrencyService));
+    }
+
+    public Task PrintReport()
+    {
+        throw new NotImplementedException("Implement PrintReport.");
+    }
+}
+```
+
+9. Проанализируйте зависимости:
+
+![CurrentProductLocalPriceReport](currentproductlocalpricereport.png)
+
+Какие зависимости имеет класс _CurrentProductLocalPriceReport_?
+
+Прочтите про _Composition Root_:
+* [Understanding the Composition Root](https://freecontent.manning.com/dependency-injection-in-net-2nd-edition-understanding-the-composition-root/)
+* [Composition Root](https://blog.ploeh.dk/2011/07/28/CompositionRoot/)
+
+Найдите Composition Root в приложении.
