@@ -258,7 +258,7 @@ Product3, 59.01
 
 ### Задание 5. REST-сервисы
 
-[Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/)
+См. статью [Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/).
 
 #### Выполнение
 
@@ -276,6 +276,8 @@ $ dotnet add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj packag
 $ dotnet add Northwind.CurrencyServices\Northwind.CurrencyServices.csproj package StyleCop.Analyzers
 ```
 
+Измените _Northwind.CurrencyServices.csproj_, чтобы включить анализаторы кода и добавьте в проект _.editorconfig_.
+
 2. Создайте пустые файлы для новых сервисов.
 
 ```sh
@@ -287,11 +289,7 @@ $ type nul > Northwind.CurrencyServices\CountryCurrency\CountryCurrencyService.c
 $ type nul > Northwind.ReportingServices.OData\ProductReports\ProductLocalPrice.cs
 ```
 
-3. Изучите статьи:
-	* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
-	* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
-
-4. Реализуйте сервис _CurrencyExchangeService_, который будет получать актуальные данные курсов обмена валют из сервиса [CurrencyLayer](https://currencylayer.com/).
+3. Реализуйте сервис _CurrencyExchangeService_, который будет получать актуальные данные курсов обмена валют из сервиса [CurrencyLayer](https://currencylayer.com/).
 
 Добавьте код в _CurrencyExchangeService.cs_:
 
@@ -312,9 +310,13 @@ public class CurrencyExchangeService
 }
 ```
 
+Изучите статьи:
+	* [REST client](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient)
+	* [How to serialize and deserialize JSON in .NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to)
+
 Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
 
-5. Реализуйте сервис _CountryCurrencyService_, который должен возвращать данные локальных валют по имени страны из сервиса [RestCountries](http://restcountries.eu/).
+4. Реализуйте сервис _CountryCurrencyService_, который должен возвращать данные локальных валют по имени страны из сервиса [RestCountries](http://restcountries.eu/).
 
 Добавьте код в _LocalCurrency.cs_:
 
@@ -341,8 +343,7 @@ public class CountryCurrencyService
 
 Добавьте реализацию сервиса. Используйте _HttpClient_ и _JsonSerializer_, чтобы получить и обработать данные сервиса _CurrencyLayer_.
 
-6. 
-
+5. Добавьте в класс _ProductReportService_ поддержку нового отчета, который будет возвращать данные продуктов с указанием их локальных цен.
 
 Добавьте код в _ProductLocalPrice.cs_:
 
@@ -369,9 +370,16 @@ public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalC
 }
 ```
 
-7. 
+Реализуйте _GetCurrentProductsWithLocalCurrencyReport_.
 
+7. Добавьте в класс _Program_ поддержку нового отчета с именем "current-products-local-prices".
 
+Отчет должен выводить:
+	* Название товара.
+	* Цену товара в долларах.
+	* Полное название страны производителя (из внешнего сервиса).
+	* Цену товара в локальной валюте страны производителя.
+	* Символ валюты страны производителя.
 
 Пример использования:
 
