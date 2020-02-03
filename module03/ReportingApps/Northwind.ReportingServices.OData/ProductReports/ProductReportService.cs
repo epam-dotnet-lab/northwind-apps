@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Northwind.CurrencyServices.CountryCurrency;
 using Northwind.CurrencyServices.CurrencyExchange;
+using Northwind.ReportingService.ProductReports;
 using NorthwindProduct = NorthwindModel.Product;
 
 namespace Northwind.ReportingServices.OData.ProductReports
