@@ -459,7 +459,7 @@ $ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj pack
 $ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj package StyleCop.Analyzers
 ```
 
-!(Northwind.ReportingServices in ReportingApps Solution)[reportingapps-reportingservices.png]
+![Northwind.ReportingServices in ReportingApps Solution](reportingapps-reportingservices.png)
 
 6. Добавьте пустой файл интерфейса _IProductReportService_:
 
@@ -472,4 +472,5 @@ $ type nul > Northwind.ReportingServices\ProductReports\IProductReportService.cs
 
 7. Проанализируйте зависимости:
 
-!(Extract Interface from ProductReportService)[productreportservice-extract-interface.png]
+![Extract Interface from ProductReportService](productreportservice-extract-interface.png)
+
