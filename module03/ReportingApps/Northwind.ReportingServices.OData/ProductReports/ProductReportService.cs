@@ -29,11 +29,8 @@ namespace Northwind.ReportingServices.OData.ProductReports
         /// Gets a product report with all current products wit local price.
         /// </summary>
         /// <returns>Returns <see cref="ProductReport{T}"/>.</returns>
-        public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalCurrencyReport()
+        public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalCurrencyReport(ICountryCurrencyService countryCurrencyService, ICurrencyExchangeService currencyExchangeService)
         {
-            var countryCurrencyService = new CountryCurrencyService();
-            var currencyExchangeService = new CurrencyExchangeService("cd4c05ecaa6787738809c8d290c5acc5");
-
             var query = (DataServiceQuery<ProductPriceSupplier>)(
                 from p in this.entities.Products
                 where !p.Discontinued

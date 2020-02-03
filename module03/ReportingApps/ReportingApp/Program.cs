@@ -34,18 +34,19 @@ namespace ReportingApp
             if (string.Equals(reportName, CurrentProductsReport, StringComparison.InvariantCultureIgnoreCase))
             {
                 var service = new ProductReportService(new Uri(NorthwindServiceUrl));
+
                 var countryService = new Northwind.CurrencyServices.CountryCurrency.CountryCurrencyService();
-/*
-                var countries = await service.Get();
+                /*
+                                var countries = await service.Get();
 
-                Dictionary<string, CountryInfo> dict = new Dictionary<string, CountryInfo>();
+                                Dictionary<string, CountryInfo> dict = new Dictionary<string, CountryInfo>();
 
-                foreach (var country in countries)
-                {
-                    var countryInfo = await countryService.Lookup(country);
-                    dict.Add(country, countryInfo);
-                }
-*/
+                                foreach (var country in countries)
+                                {
+                                    var countryInfo = await countryService.Lookup(country);
+                                    dict.Add(country, countryInfo);
+                                }
+                */
                 //await countryService.GetCurrencyInfo();
 
                 await ShowCurrentProducts();
@@ -78,7 +79,10 @@ namespace ReportingApp
         private static async Task ShowCurrentProducts()
         {
             var service = new ProductReportService(new Uri(NorthwindServiceUrl));
-            var report = await service.GetCurrentProductsWithLocalCurrencyReport();
+            var countryCurrencyService = new CountryCurrencyService();
+            var currencyExchangeService = new CurrencyExchangeService("cd4c05ecaa6787738809c8d290c5acc5");
+
+            var report = await service.GetCurrentProductsWithLocalCurrencyReport(countryCurrencyService, currencyExchangeService);
             PrintProductReport("current products:", report);
         }
 

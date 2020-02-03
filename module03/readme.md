@@ -260,13 +260,13 @@ Product3, 59.01
 
 ### Задание 5. REST-сервисы
 
-Добавьте в приложение новый отчет, который будет отображать список текущих продуктов с указанием цены товара в локальной валюте страны происхождения поставщика товара. Цена товара, которую предоставляет сервис Northwind, номинирована в долларах. Используйте сервис [RestCountries](http://restcountries.eu/), чтобы получить данные о стране, в том числе локальную валюту. Для получения актуальныъ курсов валют используйте сервис [CurrencyLayer](https://currencylayer.com/) (для доступа к сервису необходима регистрация). Механику работы с сервисами см. в статье [Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/).
+Добавьте в приложение новый отчет, который будет отображать список текущих товаров с указанием цены товара в локальной валюте страны происхождения поставщика товара. Сервис Northwind предоставляет информацию о цене товара в долларах. Используйте сервис [RestCountries](http://restcountries.eu/), чтобы получить данные о стране, в том числе локальную валюту. Для получения актуальных курсов валют используйте сервис [CurrencyLayer](https://currencylayer.com/) (для доступа к сервису необходима регистрация). Механику работы с сервисами см. в статье [Осваиваем async/await на реальном примере](https://habr.com/ru/company/ruvds/blog/436884/).
 
 #### Выполнение
 
 1. Добавьте библиотеку классов _Northwind.CurrencyServices_ и подключите анализаторы кода.
 
-![CurrencyServices in ReportingApps Solution](reportingapps-currencyservices.png)
+![Northwind.CurrencyServices in ReportingApps Solution](reportingapps-currencyservices.png)
 
 ```sh
 $ dotnet new classlib --name Northwind.CurrencyServices
@@ -386,7 +386,7 @@ public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalC
 Пример использования:
 
 ```sh
-$ .\ReportingApp.exe 
+$ .\ReportingApp.exe current-products-local-prices
 Report - current products with local price:
 Aniseed Syrup, 10$, United Kingdom of Great Britain and Northern Ireland, 08?
 Boston Crab Meat, 18$, United States of America, 18$
@@ -395,3 +395,81 @@ Carnarvon Tigers, 63$, Australia, 93$
 Chai, 18$, United Kingdom of Great Britain and Northern Ireland, 14?
 ...
 ```
+
+
+### Задание 6. Рефакторинг
+
+#### Выполнение
+
+1. Проанализируйте зависимости класса _ProductReportService_. См. статью [Understanding Dependencies](https://habr.com/ru/post/349836/):
+
+![Dependencies of ProductReportService](productreportservice-dependencies.png)
+
+Какие зависимости имеет класс _ProductReportService_?
+
+2. Добавьте интерфейсы для сервисов _CountryCurrencyService_ и _CurrencyExchangeService_. См. рефакторинг [Извлечение интерфейса](https://refactoring.guru/ru/extract-interface).
+
+```sh
+$ type nul > Northwind.CurrencyServices\CurrencyExchange\ICountryCurrencyService.cs
+$ type nul > Northwind.CurrencyServices\CountryCurrency\ICurrencyExchangeService.cs
+```
+
+Добавьте код интерфейса в _ICountryCurrencyService.cs_:
+
+```cs
+public interface ICountryCurrencyService
+{
+    Task<LocalCurrency> GetLocalCurrencyByCountry(string countryName);
+}
+```
+
+Добавьте код интерфейса в _ICurrencyExchangeService.cs_:
+
+```cs
+public interface ICurrencyExchangeService
+{
+    Task<decimal> GetCurrencyExchangeRate(string baseCurrency, string exchangeCurrency);
+}
+```
+
+Реализуйте интерфейсы в соответствующих сервисах.
+
+3. Внедрите зависимость в _ProductReportService.GetCurrentProductsWithLocalCurrencyReport_. См. главу [Understanding Method Injection](https://freecontent.manning.com/understanding-method-injection/).
+
+```cs
+public async Task<ProductReport<ProductLocalPrice>> GetCurrentProductsWithLocalCurrencyReport(ICountryCurrencyService countryCurrencyService, ICurrencyExchangeService currencyExchangeService) { ... }
+```
+
+Почему здесь использовать прием _Method Injection_?
+
+4. Проанализируйте зависимости класса _ProductReportService_.
+
+![Dependencies of ProductReportService with interfaces](productreportservice-interfaces.png)
+
+Зависит ли теперь класс _ProductReportService_ от классов _CountryCurrencyService_ и _CurrencyExchangeService_?s
+
+5. Добавьте библиотеку классов _Northwind.ReportingServices_, подключите анализаторы кода, настройте анализаторы и IDE.
+
+```sh
+$ dotnet new classlib --name Northwind.ReportingServices
+$ dotnet sln ReportingApps.sln add Northwind.ReportingServices\Northwind.ReportingServices.csproj
+$ dotnet add ReportingApp\ReportingApp.csproj reference Northwind.ReportingServices\Northwind.ReportingServices.csproj
+$ dotnet add Northwind.ReportingServices.OData\Northwind.ReportingServices.OData.csproj reference Northwind.ReportingServices\Northwind.ReportingServices.csproj
+$ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj package Microsoft.CodeAnalysis.FxCopAnalyzers
+$ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj package StyleCop.Analyzers
+```
+
+!(Northwind.ReportingServices in ReportingApps Solution)[reportingapps-reportingservices.png]
+
+6. Добавьте пустой файл интерфейса _IProductReportService_:
+
+```sh
+$ mkdir Northwind.ReportingServices\ProductReports
+$ type nul > Northwind.ReportingServices\ProductReports\IProductReportService.cs
+```
+
+[Извлеките методы класса](https://refactoring.guru/ru/extract-interface) _ProductReportService_ в интерфейс _IProductReportService_. Реализуйте интерфейс в классе сервиса.
+
+7. Проанализируйте зависимости:
+
+!(Extract Interface from ProductReportService)[productreportservice-extract-interface.png]
