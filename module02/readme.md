@@ -259,7 +259,7 @@ WaitHandle.WaitAny(new[] { asyncResult.AsyncWaitHandle }); // breakpoint #1.3
 
 Запустите приложение и, используя окно _Threads_, запишите параметры ID, Managed ID и Name для текущего потока в каждой точке останова.
 
-2. Примените подход TAP к коду клиента и расставьте брейкпоинты, как указано в коде:
+2. Примените подход TAP к коду клиента _NorthwindServiceCoreAsyncClient_ и расставьте брейкпоинты, как указано в коде:
 
 ```cs
 const string serviceUri = "https://services.odata.org/V3/Northwind/Northwind.svc/";
