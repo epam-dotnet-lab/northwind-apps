@@ -5,9 +5,12 @@
 ### Цель
 
 * Научиться проектировать и разрабатывать приложения WebAPI при помощи ASP.NET Core.
+* Научиться использовать ADO.NET для работы с базой данных.
 
-### Задание 1. 
 
+### Задание 1. ASP.NET Core
+
+Научитесь создавать простые _ASP.NET Core Web API_ приложения.
 
 #### Выполнение
 
@@ -15,9 +18,9 @@
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
 
 
-#### Задание 2. MS SQL Express LocalDB
+#### Задание 2. LocalDB
 
-Для создания приложения потребуется база данных.
+Научитесь использовать базу данных LocalDB для разработки приложений.
 
 #### Выполнение
 
@@ -42,6 +45,7 @@
 
 #### Выполнение
 
+1. 
 
 ![NorthwindWebApi Solution](northwind-webapi-solution.png)
 
