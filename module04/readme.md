@@ -41,7 +41,7 @@
 ![Execute Query](visual-studio-execute-query.png)
 
 
-#### Задание 3. Приложение Web API
+### Задание 3. Приложение Web API
 
 #### Выполнение
 
