@@ -351,6 +351,7 @@ namespace Northwind.Services.Products
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc />
         IList<Product> IProductManagementService.ShowForCategory(int categoryId)
         {
             var dao = this.daoFactory.GetProductDataAccessObject();
