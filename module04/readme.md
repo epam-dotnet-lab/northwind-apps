@@ -18,7 +18,7 @@
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
 
 
-#### Задание 2. LocalDB
+### Задание 2. LocalDB
 
 Научитесь использовать базу данных LocalDB для разработки приложений.
 
@@ -62,10 +62,12 @@
 
 2. 
 
-| CRUD             | HTTP Verb | URI                  | Request body  | Response body           |
-| ---------------- | --------- | -------------------- | ------------- | ----------------------- |
-| Create           |           | /api/categories      | Category item | Category item           |
-| Read (all items) |           | /api/categories      | None          | Array of category items |
-| Read (item)      |           | /api/categories/{id} | None          | Category item           |
-| Update           |           | /api/categories/{id} | Category item | None                    |
-| Delete           |           | /api/categories/{id} | None          | None                    |
+| CRUD             | HTTP Verb | URI                                  | Request body  | Response body           |
+| ---------------- | --------- | ------------------------------------ | ------------- | ----------------------- |
+| Create           |           | /api/categories/{categoryId}/picture | Picture       | None                    |
+| Read (item)      |           | /api/categories/{categoryId}/picture | None          | Picture                 |
+| Update           |           | /api/categories/{categoryId}/picture | Pciture       | None                    |
+| Delete           |           | /api/categories/{categoryId}/picture | None          | None                    |
+
+
+If you think that can proceed with the standard control, please, let me know till the end of the week.
