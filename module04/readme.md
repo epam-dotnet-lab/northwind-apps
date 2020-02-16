@@ -8,7 +8,7 @@
 * Научиться использовать ADO.NET для работы с базой данных.
 
 
-### Задание 1. ASP.NET Core
+### Задание 1. ASP.NET Core Web API
 
 Научитесь создавать простые _ASP.NET Core Web API_ приложения.
 
@@ -17,6 +17,18 @@
 1. Пройдите интерактивное руководство [Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/learn/modules/build-web-api-net-core/).
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
 
+
+### Задание 2. Northwind API App
+
+#### Выполнение
+
+1. Создайте solution _NorthwindWebApps_, приложение Web API _NorthwindApiApp_ и библиотеку _Northwind.Services_.
+
+![NorthwindWebApps: Services](northwindwebapps-services.png)
+
+
+
+![NorthwindWebApps: EntityFramework Core](northwind-webapi-entityframeworkcore.png)
 
 ### Задание 2. LocalDB
 
@@ -71,3 +83,9 @@
 
 
 If you think that can proceed with the standard control, please, let me know till the end of the week.
+
+1. Создание web api с products, ef + memory
+
+2. Создание web api product+category, dao
+
+3. category picture
