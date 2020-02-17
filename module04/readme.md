@@ -111,7 +111,7 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 
 3. Добавьте новую библиотеку _Northwind.Services.DataAccess_.
 
-!(NorthwindWebApps: DAO)[northwindapiapp-dao.png]
+![NorthwindWebApps: DAO](northwindapiapp-dao.png)
 
 4. В _Northwind.Services.DataAccess_ создайте новый сервис _ProductManagementDataAccessService_, который должен реализовывать интерфейсы _IProductManagementService_. Сервис должен использовать зависимость на _NorthwindDataAccessFactory_, чтобы получать данные из БД Northwind. Добавьте реализацию методов сервиса.
 
@@ -123,7 +123,7 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 
 8. Создайте новую библиотеку _Northwind.DataAccess.SqlServer_, отредактируйте проекты, чтобы изменить пакеты и ссылки на связанные проекты.
 
-!(NorthwindWebApps: Northwind.DataAccess.SqlServer)[northwindapiapp-dao-sqlserver.png]
+![NorthwindWebApps: Northwind.DataAccess.SqlServer](northwindapiapp-dao-sqlserver.png)
 
 9. Перенесите код классов, которые отвечают за работу с БД MS SQL в _Northwind.DataAccess.SqlServer_.
 
