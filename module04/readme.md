@@ -90,8 +90,41 @@
 
 ### Задание 2. Data Access Object
 
-### Задание 3. Приложение Web API
+Добавьте в приложение функциональность по работе с базой данных. Реализуйте слой доступа к данным при помощи [паттерна DAO](http://javatutor.net/articles/j2ee-pattern-data-access-object). Для работы потребуется база данных [MS SQL LocalDB](use-localdb.md).
 
 #### Выполнение
 
-1. 
+1. Добавьте в решение _NorthwindWebApps_ библиотеку _Northwind.DataAccess_, скопируйте [все классы в проект](NorthwindWebApps/Northwind.DataAccess).
+
+2. Добавьте регистрацию сервисов:
+
+```cs
+services.AddScoped((service) =>
+{
+    var sqlConnection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Northwind;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+    sqlConnection.Open();
+    return sqlConnection;
+});
+
+services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServerDataAccessFactory>();
+```
+
+3. Добавьте новую библиотеку _Northwind.Services.DataAccess_.
+
+!(NorthwindWebApps: DAO)[northwindapiapp-dao.png]
+
+4. В _Northwind.Services.DataAccess_ создайте новый сервис _ProductManagementDataAccessService_, который должен реализовывать интерфейсы _IProductManagementService_. Сервис должен использовать зависимость на _NorthwindDataAccessFactory_, чтобы получать данные из БД Northwind. Добавьте реализацию методов сервиса.
+
+5. Измените регистрацию сервиса для интерфейса _IProductManagementService_, чтобы использовать сервис _ProductManagementDataAccessService_. Проверьте работоспособность приложения.
+
+6. Добавьте в _Northwind.Services.DataAccess_ новый сервис _ProductCategoriesManagementDataAccessService_, реализуйте его, зарегистрируйте сервис. Проверьте работоспособность приложения.
+
+7. Добавьте в _Northwind.Services.DataAccess_ новый сервис _ProductCategoryPicturesManagementDataAccessService_, реализуйте его, зарегистрируйте сервис. Проверьте работоспособность приложения.
+
+8. Создайте новую библиотеку _Northwind.DataAccess.SqlServer_, отредактируйте проекты, чтобы изменить пакеты и ссылки на связанные проекты.
+
+!(NorthwindWebApps: Northwind.DataAccess.SqlServer)[northwindapiapp-dao-sqlserver.png]
+
+9. Перенесите код классов, которые отвечают за работу с БД MS SQL в _Northwind.DataAccess.SqlServer_.
+
+10. Перенесите строку подключения к БД в конфигурационный файл. См. [Configuration in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/).
