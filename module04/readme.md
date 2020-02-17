@@ -18,7 +18,9 @@
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
 
 
-### Задание 2. Northwind API App
+### Задание 2. Northwind WebAPI
+
+Создайте приложение Web API с методами для управления категориями товаров.
 
 #### Выполнение
 
@@ -33,8 +35,8 @@
 * [Products\IProductManagementService.cs](NorthwindWebApps/Northwind.Services/Products/IProductManagementService.cs)
 * [Products\ProductManagementService.cs](NorthwindWebApps/Northwind.Services/Products/ProductManagementService.cs)
 
-3. Зарегистрируйте сервис _ProductManagementService_ в _Startup.ConfigureServices_. См. [App startup in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup).
-4. Добавьте новый контроллер _ProductCategoriesController_. Используйте [Constructor Injection](http://sergeyteplyakov.blogspot.com/2012/12/di-constructor-injection.html) для того, чтобы внедрить в контроллер зависимость на сервис _IProductManagementService_. См. [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection).
+3. Зарегистрируйте сервис _ProductManagementService_ как реализацию интерфейса _IProductManagementService_ в _Startup.ConfigureServices_ с transient lifetime. См. [App startup in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup) и [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection).
+4. Добавьте новый контроллер _ProductCategoriesController_. Используйте [Constructor Injection](http://sergeyteplyakov.blogspot.com/2012/12/di-constructor-injection.html) для того, чтобы внедрить в контроллер зависимость на сервис _IProductManagementService_.
 5. Заполните пустые колонки в таблице API методов для категорий.
 
 | Operation        | HTTP Verb | URI                  | Request body | Response body |
@@ -46,7 +48,8 @@
 | Delete           |           | /api/categories/{id} |              |               |
 
 6. Реализуйте все методы для _ProductCategoriesController_, используя методы интерфейса _IProductManagementService_.
-7. Добавьте новый контроллер _ProductsController_, заполните пустые колонки в таблице API методов для товаров и реализуйте методы контроллера.
+7. Реализуйте в _ProductManagementService_ использованные методы интерфейса _IProductManagementService_, используя in-memory database (добавьте необходимые классы - контекст и сущность). Запустите приложение и проверьте работоспособность методов при помощи Postman.
+8. Добавьте новый контроллер _ProductsController_, заполните пустые колонки в таблице API методов для товаров, реализуйте необходимые методы контроллера и сервиса.
 
 | Operation        | HTTP Verb | URI                  | Request body | Response body |
 | ---------------- | --------- | -------------------- | ------------ | ------------- |
@@ -56,7 +59,7 @@
 | Update           |           |                      |              |               |
 | Delete           |           |                      |              |               |
 
-8. Добавьте в _ProductCategoriesController_ новые методы для управления картинкой для категории.
+9. Реализуйте в _ProductCategoriesController_ новые методы для управления картинкой (поток байтов) для категории.
 
 | Operation        | HTTP Verb | URI                                  | Request body    | Response body  |
 | ---------------- | --------- | ------------------------------------ | --------------- | -------------- |
@@ -64,10 +67,21 @@
 | Get picture      | GET       | /api/categories/{categoryId}/picture | None            | Picture stream |
 | Delete picture   | DELETE    | /api/categories/{categoryId}/picture | None            | None           |
 
-9. Добавьте библиотеку _Northwind.Services.EntityFrameworkCore_, исправьте зависимости на nuget-пакеты, перенесите в библиотеку код сервиса _ProductManagementService_ и все необходимые классы.
+11. Проанализируйте зависимости:
+
+![NorthwindWebApps: IProductManagementService](northwindapiapp-iproductmanagementservice.png)
+
+12. Выделите из интерфейса _IProductManagementService_ интерфейсы для работы с категориями и картинками - _IProductCategoryManagementService_ и _IProductCategoryPictureService_, перенесите в новые интерфейсы соответствующие методы, зарегистрируйте интерфейсы как сервисы и исправьте конструкторы соответствующих контроллеров. См. [I: Принцип разделения интерфейса](https://refactoring.guru/ru/didp/principles/solid-principles/isp).
+
+13. Выделите методы класс сервиса _ProductManagementService_ в отдельные сервисы _ProductCategoryManagementService_ и _ProductCategoryPicturesService_. См. [S: Принцип единственной ответственности](https://refactoring.guru/ru/didp/principles/solid-principles/srp).
+
+14. Добавьте библиотеку _Northwind.Services.EntityFrameworkCore_, исправьте зависимости на nuget-пакеты, перенесите в библиотеку код сервисов (_ProductManagementService_,  _ProductCategoryManagementService_, _ProductCategoryPictureService_) и все необходимые классы.
 
 ![NorthwindWebApps: EntityFramework Core](northwind-webapi-entityframeworkcore.png)
 
+15. Проанализируйте зависимости:
+
+![NorthwindWebApps: 3 interfaces](northwindapiapp-three-interfaces.png)
 
 
 ### Задание 2. LocalDB
