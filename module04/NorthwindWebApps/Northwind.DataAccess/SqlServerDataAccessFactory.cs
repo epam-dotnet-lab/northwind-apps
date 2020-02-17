@@ -1,6 +1,7 @@
 ﻿// ReSharper disable CheckNamespace
 using System;
 using System.Data.SqlClient;
+using Northwind.DataAccess.Employees;
 using Northwind.DataAccess.Products;
 
 namespace Northwind.DataAccess
@@ -31,6 +32,12 @@ namespace Northwind.DataAccess
         public override IProductDataAccessObject GetProductDataAccessObject()
         {
             return new ProductSqlServerDataAccessObject(this.sqlConnection);
+        }
+
+        /// <inheritdoc />
+        public override IEmployeeDataAccessObject GetEmployeeDataAccessObject()
+        {
+            return new EmployeeSqlServerDataAccessObject();
         }
     }
 }

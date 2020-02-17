@@ -1,4 +1,5 @@
-﻿using Northwind.DataAccess.Products;
+﻿using Northwind.DataAccess.Employees;
+using Northwind.DataAccess.Products;
 
 namespace Northwind.DataAccess
 {
@@ -18,5 +19,11 @@ namespace Northwind.DataAccess
         /// </summary>
         /// <returns>A <see cref="IProductCategoryDataAccessObject"/>.</returns>
         public abstract IProductCategoryDataAccessObject GetProductCategoryDataAccessObject();
+
+        /// <summary>
+        /// Gets a DAO for Northwind employees.
+        /// </summary>
+        /// <returns>A <see cref="IEmployeeDataAccessObject"/>.</returns>
+        public abstract IEmployeeDataAccessObject GetEmployeeDataAccessObject();
     }
 }

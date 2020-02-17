@@ -2,11 +2,14 @@
 
 ## Модуль 4. Приложения Web API на ASP.NET Core
 
+__Внимание!__ В этом модуле используется большое количество отдельных проектов. Это сделано для того, чтобы подчеркнуть зависимости между классами и сгруппировать классы в соответствии с выполняемыми функциями. Группировка классов в реальных проектах может происходить по другим критериям.
+
+
 ### Цель
 
 * Научиться проектировать и разрабатывать приложения WebAPI при помощи ASP.NET Core.
 * Научиться использовать ADO.NET для работы с базой данных.
-
+* 
 
 ### Задание 1. ASP.NET Core Web API
 
@@ -16,7 +19,8 @@
 
 1. Пройдите интерактивное руководство [Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/learn/modules/build-web-api-net-core/).
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
-
+3.
+4. Научиться
 
 ### Задание 2. Northwind Web API
 
@@ -128,3 +132,27 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 9. Перенесите код классов, которые отвечают за работу с БД MS SQL в _Northwind.DataAccess.SqlServer_.
 
 10. Перенесите строку подключения к БД в конфигурационный файл. См. [Configuration in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/).
+
+
+### Задание 3. Employees
+
+#### Выполнение
+
+1. Добавьте необходимые методы в _IEmployeeManagementService_.
+
+2. Спроектируйте методы API для работы со списком сотрудников:
+
+| Operation        | HTTP Verb | URI                  | Request body | Response body |
+| ---------------- | --------- | -------------------- | ------------ | ------------- |
+| Create           |           |                      |              |               |
+| Read (all items) |           |                      |              |               |
+| Read (item)      |           |                      |              |               |
+| Update           |           |                      |              |               |
+| Delete           |           |                      |              |               |
+
+
+3. Добавьте новый контроллер _EmployeesController_, реализуйте методы.
+
+4. Добавьте поддержку для DAO и in-memory database.
+
+5. Реализуйте сервисы.
