@@ -472,11 +472,17 @@ $ type nul > Northwind.ReportingServices\ProductReports\IProductReportService.cs
 
 [Извлеките методы класса](https://refactoring.guru/ru/extract-interface) _ProductReportService_ в интерфейс _IProductReportService_. Реализуйте интерфейс в классе сервиса. Переместите зависимые классы в сборку _Northwind.ReportingService_.
 
-7. Проанализируйте зависимости:
+7. Добавьте в _Northwind.ReportingServices_ зависимость на сборку _Northwind.CurrencyServices_, чтобы пользоваться интерфейсами _ICurrencyExchangeService_ и _ICountryCurrencyService_:
+
+```sh
+$ dotnet add Northwind.ReportingServices\Northwind.ReportingServices.csproj reference Northwind.CurrencyServices\Northwind.CurrencyServices.csproj
+```
+
+8. Проанализируйте зависимости:
 
 ![Extract Interface from ProductReportService](productreportservice-extract-interface.png)
 
-8. Добавьте в _ReportingApp_ новый класс _CurrentProductLocalPriceReport_, который отвечает за печать отчета.
+9. Добавьте в _ReportingApp_ новый класс _CurrentProductLocalPriceReport_, который отвечает за печать отчета.
 
 ```sh
 type nul > ReportingApp\CurrentProductLocalPriceReport.cs
@@ -505,11 +511,11 @@ class CurrentProductLocalPriceReport
 }
 ```
 
-9. Проанализируйте зависимости:
+10. Проанализируйте зависимости:
 
 ![CurrentProductLocalPriceReport](currentproductlocalpricereport.png)
 
-10. Какие зависимости имеет класс _CurrentProductLocalPriceReport_?
+11. Какие зависимости имеет класс _CurrentProductLocalPriceReport_?
 
 Прочтите про _Composition Root_:
 * [Understanding the Composition Root](https://freecontent.manning.com/dependency-injection-in-net-2nd-edition-understanding-the-composition-root/)

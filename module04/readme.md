@@ -22,13 +22,48 @@
 
 #### Выполнение
 
-1. Создайте solution _NorthwindWebApps_, приложение Web API _NorthwindApiApp_ и библиотеку _Northwind.Services_.
+1. Создайте решение _NorthwindWebApps_:
 
 ![NorthwindWebApps: Services](northwindwebapps-services.png)
 
+2. В проект _Northwind.Services_ добавьте файлы:
 
+* [Products\Product.cs](NorthwindWebApps\Northwind.Services\Products\Product.cs)
+* [Products\ProductCategory.cs](\NorthwindWebApps\Northwind.Services\Products\ProductCategory.cs)
+* [Products\IProductManagementService.cs](\NorthwindWebApps\Northwind.Services\Products\IProductManagementService.cs)
+* [Products\ProductManagementService.cs](\NorthwindWebApps\Northwind.Services\Products\ProductManagementService.cs)
+
+3. Зарегистрируйте сервис _ProductManagementService_ в _Startup.ConfigureServices_. См. [App startup in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/startup).
+4. Добавьте новый контроллер _ProductCategoriesController_. Используйте _Constructor Injection_ для того, чтобы внедрить в контроллер зависимость на сервис _IProductManagementService_. См. [Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection).
+5. Заполните пустые колонки в таблице API методов для категорий.
+
+| Operation        | HTTP Verb | URI                  | Request body | Response body |
+| ---------------- | --------- | -------------------- | ------------ |  ------------ |
+| Create           |           | /api/categories      |              |               |
+| Read (all items) |           | /api/categories      |              |               |
+| Read (item)      |           | /api/categories/{id} |              |               |
+| Update           |           | /api/categories/{id} |              |               |
+| Delete           |           | /api/categories/{id} |              |               |
+
+6. Реализуйте все методы для _ProductCategoriesController_.
+7. Добавьте новый контроллер _ProductCategoriesController_. Используйте _Constructor Injection_ для того, чтобы внедрить в контроллер зависимость на сервис _IProductManagementService_.
+8. Заполните пустые колонки в таблице API методов для товаров.
+
+| Operation        | HTTP Verb | URI                  | Request body | Response body |
+| ---------------- | --------- | -------------------- | ------------ | ------------- |
+| Create           |           |                      |              |               |
+| Read (all items) |           |                      |              |               |
+| Read (item)      |           |                      |              |               |
+| Update           |           |                      |              |               |
+| Delete           |           |                      |              |               |
+
+Добавьте новый контроллер _ProductCategoriesController_ и реализуйте все actions из таблицы.
+
+3. ProductManagementService.cs
 
 ![NorthwindWebApps: EntityFramework Core](northwind-webapi-entityframeworkcore.png)
+
+
 
 ### Задание 2. LocalDB
 
