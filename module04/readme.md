@@ -18,9 +18,9 @@
 2. Пройдите руководство [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api).
 
 
-### Задание 2. Northwind WebAPI
+### Задание 2. Northwind Web API
 
-Создайте приложение Web API с методами для управления категориями товаров.
+Создайте приложение Web API с методами для управления товарами и категориями товаров.
 
 #### Выполнение
 
@@ -48,7 +48,7 @@
 | Delete           |           | /api/categories/{id} |              |               |
 
 6. Реализуйте все методы для _ProductCategoriesController_, используя методы интерфейса _IProductManagementService_.
-7. Реализуйте в _ProductManagementService_ использованные методы интерфейса _IProductManagementService_, используя in-memory database (добавьте необходимые классы - контекст и сущность). Запустите приложение и проверьте работоспособность методов при помощи Postman.
+7. Реализуйте в _ProductManagementService_ использованные методы интерфейса _IProductManagementService_. В качестве хранилища используйте in-memory database. Добавьте классы - контекст _NorthwindContext_ и необходимые сущности. Запустите приложение и проверьте работоспособность методов при помощи Postman.
 8. Добавьте новый контроллер _ProductsController_, заполните пустые колонки в таблице API методов для товаров, реализуйте необходимые методы контроллера и сервиса.
 
 | Operation        | HTTP Verb | URI                  | Request body | Response body |
@@ -59,7 +59,7 @@
 | Update           |           |                      |              |               |
 | Delete           |           |                      |              |               |
 
-9. Реализуйте в _ProductCategoriesController_ новые методы для управления картинкой (поток байтов) для категории.
+9. Реализуйте в _ProductCategoriesController_ новые методы для управления картинкой (поток байтов) для категории. См. [Upload files in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads), [IFormFile](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfile) и [ControllerBase.File](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.file).
 
 | Operation        | HTTP Verb | URI                                  | Request body    | Response body  |
 | ---------------- | --------- | ------------------------------------ | --------------- | -------------- |
