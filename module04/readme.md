@@ -56,14 +56,15 @@
 | Update           |           |                      |              |               |
 | Delete           |           |                      |              |               |
 
-8.
+8. Добавьте в _ProductCategoriesController_ новые методы для управления картинкой для категории.
 
 | Operation        | HTTP Verb | URI                                  | Request body    | Response body  |
 | ---------------- | --------- | ------------------------------------ | --------------- | -------------- |
-| Upload picture   |           | /api/categories/{categoryId}/picture | Picture stream  | None           |
-| Get picture      |           | /api/categories/{categoryId}/picture | None            | Picture stream |
-| Delete picture   |           | /api/categories/{categoryId}/picture | None            | None           |
+| Upload picture   | PUT       | /api/categories/{categoryId}/picture | Picture stream  | None           |
+| Get picture      | GET       | /api/categories/{categoryId}/picture | None            | Picture stream |
+| Delete picture   | DELETE    | /api/categories/{categoryId}/picture | None            | None           |
 
+9. Добавьте библиотеку _Northwind.Services.EntityFrameworkCore_, исправьте зависимости на nuget-пакеты, перенесите в библиотеку код сервиса _ProductManagementService_ и все необходимые классы.
 
 ![NorthwindWebApps: EntityFramework Core](northwind-webapi-entityframeworkcore.png)
 
