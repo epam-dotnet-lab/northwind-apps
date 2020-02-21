@@ -92,7 +92,7 @@ __Внимание!__ В этом модуле используется боль
 17. Найдите в приложении Composition Root. См. [Using a DI Container in a Composition Root](https://freecontent.manning.com/dependency-injection-in-net-2nd-edition-understanding-the-composition-root/).
 
 
-### Задание 2. Data Access Object
+### Задание 3. Data Access Object
 
 Добавьте в приложение функциональность по работе с базой данных. Реализуйте слой доступа к данным при помощи [паттерна DAO](http://javatutor.net/articles/j2ee-pattern-data-access-object). Для работы потребуется база данных [MS SQL LocalDB](use-localdb.md).
 
@@ -134,7 +134,7 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 10. Перенесите строку подключения к БД в конфигурационный файл. См. [Configuration in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/).
 
 
-### Задание 3. Employees
+### Задание 4. Employees
 
 #### Выполнение
 

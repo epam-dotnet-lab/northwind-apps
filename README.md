@@ -9,3 +9,4 @@ A group of tasks for .NET Lab students to learn ASP.NET WebAPI &amp; MVC concept
 2. [Клиент для OData-сервиса](module02)
 3. [Запросы к сервисам данных](module03)
 4. [Приложения Web API на ASP.NET Core](module04)
+5. [Использование Entity Framework](module05)
