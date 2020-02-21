@@ -410,8 +410,8 @@ Chai, 18$, United Kingdom of Great Britain and Northern Ireland, 14?
 2. Добавьте интерфейсы для сервисов _CountryCurrencyService_ и _CurrencyExchangeService_. См. рефакторинг [Извлечение интерфейса](https://refactoring.guru/ru/extract-interface).
 
 ```sh
-$ type nul > Northwind.CurrencyServices\CurrencyExchange\ICountryCurrencyService.cs
-$ type nul > Northwind.CurrencyServices\CountryCurrency\ICurrencyExchangeService.cs
+$ type nul > Northwind.CurrencyServices\CurrencyExchange\ICurrencyExchangeService.cs
+$ type nul > Northwind.CurrencyServices\CountryCurrency\ICountryCurrencyService.cs
 ```
 
 Добавьте код интерфейса в _ICountryCurrencyService.cs_:
