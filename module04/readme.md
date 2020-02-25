@@ -166,14 +166,13 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 
 1. Пройдите [Ultimate async / await Tutorial in C#](https://www.codingame.com/playgrounds/4240/your-ultimate-async-await-tutorial-in-c/introduction).
 2. Прочитайте [Naming, parameters, and return types](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap#naming-parameters-and-return-types).
-3. Примените TAP для одного сценария, например, _получение списка категорий товаров_.
-	* Измените сигнатуру метода _IProductCategoryDataAccessObject.SelectProductCategories_ и переименуйте его:
+3. Примените TAP для одного сценария, например, _получение списка категорий товаров_. Измените сигнатуру метода _IProductCategoryDataAccessObject.SelectProductCategories_ и переименуйте его:
 
 ```cs
 Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offset, int limit);
 ```
 
-	* Измените реализации. Например, _ProductCategorySqlServerDataAccessObject_:
+4. Измените реализации. Например, _ProductCategorySqlServerDataAccessObject_:
 
 ```cs
 public async Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offset, int limit)
@@ -183,7 +182,7 @@ public async Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesA
 }
 ```
 
-	* Скопируйте метод _ExecuteReader_ в _ExecuteReaderAsync_ и примените TAP:
+5. Скопируйте метод _ExecuteReader_ в _ExecuteReaderAsync_ и примените TAP:
 
 ```cs
 private async Task<IList<ProductCategoryTransferObject>> ExecuteReaderAsync(string commandText)
@@ -194,16 +193,16 @@ private async Task<IList<ProductCategoryTransferObject>> ExecuteReaderAsync(stri
 }
 ```
 
-	* Измените сигнатуру _IProductCategoryManagementService.ShowCategories_ и переименуйте его:
+6. Измените сигнатуру _IProductCategoryManagementService.ShowCategories_ и переименуйте его:
 
 ```cs
 Task<IList<ProductCategory>> ShowCategoriesAsync(int offset, int limit);
 ```
 
-	* Измените реализации для _IProductCategoryManagementService.ShowCategoriesAsync_.
-	* Измените соответствующий action для _ProductCategoriesController_.
-	* Проверьте работоспособность endpoint. 
+7. Измените реализации для _IProductCategoryManagementService.ShowCategoriesAsync_.
+8. Измените соответствующий action для _ProductCategoriesController_.
+9. Проверьте работоспособность endpoint. 
 
 > Что-то пошло не так? Где-то пропущен await!
 
-4. Примените TAP для всех actions всех контроллеров.
+10. Примените TAP для всех actions всех контроллеров.
