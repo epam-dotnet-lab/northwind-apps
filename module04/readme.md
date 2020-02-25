@@ -177,8 +177,8 @@ Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offs
 ```cs
 public async Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offset, int limit)
 {
-	// ...
-	return await this.ExecuteReaderAsync(commandText);
+    // ...
+    return await this.ExecuteReaderAsync(commandText);
 }
 ```
 
@@ -187,9 +187,9 @@ public async Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesA
 ```cs
 private async Task<IList<ProductCategoryTransferObject>> ExecuteReaderAsync(string commandText)
 {
-	// ...
+    // ...
     using (var reader = await command.ExecuteReaderAsync())
-	// ...
+    // ...
 }
 ```
 
