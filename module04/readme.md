@@ -9,7 +9,8 @@ __Внимание!__ В этом модуле используется боль
 
 * Научиться проектировать и разрабатывать приложения WebAPI при помощи ASP.NET Core.
 * Научиться использовать ADO.NET для работы с базой данных.
-* 
+* Научиться использовать async/await и TAP для IO-bound операций.
+
 
 ### Задание 1. ASP.NET Core Web API
 
@@ -156,3 +157,54 @@ services.AddTransient<DataAccess.NorthwindDataAccessFactory, DataAccess.SqlServe
 4. Добавьте поддержку для DAO и in-memory database.
 
 5. Реализуйте сервисы.
+
+
+### Задание 5. Refactoring: Task Asynchronous Pattern
+
+Научитесь применять async/await и Task Asynchronous Pattern для IO-bound операций (работа с БД).
+
+#### Выполнение
+
+1. Пройдите [Ultimate async / await Tutorial in C#](https://www.codingame.com/playgrounds/4240/your-ultimate-async-await-tutorial-in-c/introduction).
+2. Прочитайте [Naming, parameters, and return types](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap#naming-parameters-and-return-types).
+3. Примените TAP для одного сценария, например, _получение списка категорий товаров_.
+3.1. Измените сигнатуру метода _IProductCategoryDataAccessObject.SelectProductCategories_ и переименуйте его:
+
+```cs
+Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offset, int limit);
+```
+
+3.2. Измените реализации. Например, _ProductCategorySqlServerDataAccessObject_:
+
+```cs
+public async Task<IList<ProductCategoryTransferObject>> SelectProductCategoriesAsync(int offset, int limit)
+{
+	// ...
+	return await this.ExecuteReaderAsync(commandText);
+}
+```
+
+3.3. Скопируйте метод _ExecuteReader_ в _ExecuteReaderAsync_ и примените TAP:
+
+```cs
+private async Task<IList<ProductCategoryTransferObject>> ExecuteReaderAsync(string commandText)
+{
+	// ...
+    using (var reader = await command.ExecuteReaderAsync())
+	// ...
+}
+```
+
+3.4. Измените сигнатуру _IProductCategoryManagementService.ShowCategories_ и переименуйте его:
+
+```cs
+Task<IList<ProductCategory>> ShowCategoriesAsync(int offset, int limit);
+```
+
+3.5. Измените реализации для _IProductCategoryManagementService.ShowCategoriesAsync_.
+3.6. Измените соответствующий action для _ProductCategoriesController_.
+3.7. Проверьте работоспособность endpoint. 
+
+> Что-то пошло не так? Где-то пропущен await!
+
+4. Примените TAP для всех actions всех контроллеров.
