@@ -75,7 +75,7 @@ PM> Scaffold-DbContext -Connection "data source=(localdb)\MSSQLLocalDB;Integrate
 
 ### Задание 4. Code-First
 
-В этом задании нужно добавить функциональность для ведения корпоративного блога компании Northwind. Статьи будут добавлять сотрудники компании. Каждая статья может быть связана с одним или несколькими продуктами. Данные должны храниться в отдельной БД - _NorthwindBlogging_.
+В этом задании нужно добавить функциональность для ведения корпоративного блога компании Northwind. Статьи будут добавлять сотрудники компании. Данные должны храниться в отдельной БД - _NorthwindBlogging_.
 
 #### Выполнение
 
@@ -223,8 +223,57 @@ _authorId_ сотрудника - это _Employees.EmployeeID_ в БД _Northwi
 }
 ```
 
+### Задание 5. Связь с товарами
+
+В этом задании нужно добавить функциональность, которая позволит связать статью в блоге с товарами из БД _Northwind_. Это нужно для того, чтобы отображать товары, которые упоминаются в статье блога.
+
+#### Выполнение
+
+1. Добавьте новую модель _BlogArticleProduct_, добавьте необходимый код в контекст.
+
+```
+Northwind.Services.EntityFrameworkCore.Blogging\Entities\BlogArticleProduct.cs
+```
+
+2. Добавьте новую миграцию _AddBlogArticleProduct_ и примените ее к БД _NorthwindBlogging_.
+3. Спроектируйте API:
+
+| Operation                                           | HTTP Verb | URI                                      | Request body | Response body |
+| --------------------------------------------------- | --------- | ---------------------------------------- | ------------ | ------------- |
+| Return all related products                         |           | /api/articles/{article-id}/products      |              |               |
+| Create a link to a product for an article           |           | /api/articles/{article-id}/products/{id} |              |               |
+| Remove an existed link to a product from an article |           | /api/articles/{article-id}/products/{id} |              |               |
+
+4. Реализуйте функциональность.
+
+
+### Задание 6. Комментарии
+
+В этом задании нужно добавить возможность комментирования статей блога для заказчиков (_Northwind.Customers_).
+
+#### Выполнение
+
+1. Добавьте новую модель _BlogComment_, добавьте необходимый код в контекст.
+
+```
+Northwind.Services.EntityFrameworkCore.Blogging\Entities\BlogComment.cs
+```
+
+2. Добавьте новую миграцию _AddBlogComment_ и примените ее к БД _NorthwindBlogging_.
+3. Спроектируйте API:
+
+| Operation        | HTTP Verb | URI                                      | Request body | Response body |
+| ---------------- | --------- | ---------------------------------------- | ------------ | ------------- |
+| Create           |           | /api/articles/{article-id}/comments      |              |               |
+| Read (all items) |           | /api/articles/{article-id}/comments      |              |               |
+| Update           |           | /api/articles/{article-id}/comments/{id} |              |               |
+| Delete           |           | /api/articles/{article-id}/comments/{id} |              |               |
+
+4. Реализуйте функциональность.
+
 
 ### Проверочные вопросы:
 
 * Зачем нужен метод _DbContext.OnModelCreating_?
 * Что такое _Data Annotations_?
+... todo ...
