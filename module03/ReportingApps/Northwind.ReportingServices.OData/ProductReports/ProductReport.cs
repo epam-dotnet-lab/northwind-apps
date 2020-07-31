@@ -24,7 +24,11 @@ namespace Northwind.ReportingServices.OData.ProductReports
         /// <param name="products">A list of lines of type <typeparamref name="T"/>.</param>
         public ProductReport(IEnumerable<T> products)
         {
-            this.Products = products.ToArray() ?? throw new ArgumentNullException(nameof(products));
+            if (products is null)
+            {
+                throw new ArgumentNullException(nameof(products));
+            }
+            this.Products = products.ToArray();
         }
 
         /// <summary>
