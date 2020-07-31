@@ -28,6 +28,7 @@ namespace Northwind.ReportingServices.OData.ProductReports
             {
                 throw new ArgumentNullException(nameof(products));
             }
+
             this.Products = products.ToArray();
         }
 
